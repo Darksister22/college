@@ -1,4 +1,4 @@
-import 'package:college/style/customLogin.dart';
+import 'package:college/style/customlogin.dart';
 import 'package:college/style/formItems.dart';
 import 'package:college/style/text.dart';
 import 'package:college/style/widgets.dart';
@@ -27,9 +27,9 @@ class _LoginState extends State<Login> {
             alignment: Alignment.center,
             child: Container(
               width: width / 2,
-              height: height / 2,
+              height: height / 2.2,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                borderRadius: const BorderRadius.all(Radius.circular(40.0)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -52,7 +52,14 @@ class _LoginState extends State<Login> {
                     input(context, "اسم المستخدم"),
                     sizedBox(height: 10.0),
                     input(context, "كلمة السر", password: true),
-                    hotElevatedButton(() {}, "تسجيل الدخول")
+                    sizedBox(height: 30.0),
+                    Row(
+                      children: [
+                        hotElevatedButton(() {}, "تسجيل الدخول"),
+                        sizedBox(width: 38.0),
+                        hotElevatedButton(() {}, "الدخول كضيف"),
+                      ],
+                    )
                   ],
                 )),
               ),
