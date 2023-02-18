@@ -3,7 +3,7 @@ import 'package:flutter_admin_scaffold/admin_scaffold.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 SideBar sideBar = const SideBar(
-  textStyle: TextStyle(fontWeight: FontWeight.w400, color: Color(0xFF141B2C)),
+  textStyle: TextStyle(color: Color(0xFF141B2C)),
   backgroundColor: Color(0xFFDBE2F9),
   items: [
     AdminMenuItem(
