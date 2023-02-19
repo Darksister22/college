@@ -1,4 +1,4 @@
-import 'package:college/screens/dashboard.dart';
+import 'package:college/screens/home.dart';
 import 'package:college/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -65,6 +65,6 @@ class MyApp extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(10))),
             )),
             textTheme: GoogleFonts.almaraiTextTheme()),
-        home: const Dashboard());
+        home: const Home());
   }
 }

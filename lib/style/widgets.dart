@@ -20,14 +20,6 @@ Container primaryContainer(context, width, height, child) {
       height: height,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 2,
-            offset: const Offset(0, 3),
-          )
-        ],
         color: Theme.of(context).colorScheme.primaryContainer,
       ),
       child: child);
@@ -39,4 +31,36 @@ Text sectionText(context, label) {
           fontWeight: FontWeight.w600,
           fontSize: 20,
           color: Theme.of(context).colorScheme.secondary));
+}
+
+Container statContainer(context, width, height, stat, title, icon) {
+  return Container(
+    width: width,
+    height: height,
+    decoration: BoxDecoration(
+      borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+      color: Theme.of(context).colorScheme.tertiaryContainer,
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          icon,
+          sizedBox(width: 30.0),
+          Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(stat,
+                    style: const TextStyle(
+                        fontSize: 50, fontWeight: FontWeight.bold)),
+                Text(
+                  title,
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ]),
+        ],
+      ),
+    ),
+  );
 }
