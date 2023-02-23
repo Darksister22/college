@@ -25,29 +25,61 @@ class _StudentMenuState extends State<StudentMenu> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               sizedBox(height: 30.0),
-              mainSurface(context, "الرجاء اختيار المرحلة لعرض الطلبة"),
+              Row(
+                children: [
+                  mainSurface(context, "الرجاء اختيار المرحلة لعرض الطلبة"),
+                  const Spacer(),
+                  iconLabelButton(() {}, "طالب جديد", FontAwesomeIcons.plus),
+                  sizedBox(width: 40.0)
+                ],
+              ),
               sizedBox(height: 40.0),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  buttonCard(context, width / 5.5, height / 7,
-                      const FaIcon(FontAwesomeIcons.one), "المرحلة الاولى"),
-                  buttonCard(context, width / 5.5, height / 7,
-                      const FaIcon(FontAwesomeIcons.two), "المرحلة الثانية"),
-                  buttonCard(context, width / 5.5, height / 7,
-                      const FaIcon(FontAwesomeIcons.three), "المرحلة الثالثة"),
+                  buttonCard(
+                      context,
+                      width / 5.5,
+                      height / 7,
+                      const FaIcon(FontAwesomeIcons.one),
+                      "المرحلة الاولى",
+                      () {}),
+                  buttonCard(
+                      context,
+                      width / 5.5,
+                      height / 7,
+                      const FaIcon(FontAwesomeIcons.two),
+                      "المرحلة الثانية",
+                      () {}),
+                  buttonCard(
+                      context,
+                      width / 5.5,
+                      height / 7,
+                      const FaIcon(FontAwesomeIcons.three),
+                      "المرحلة الثالثة",
+                      () {}),
                 ],
               ),
               sizedBox(height: 30.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  buttonCard(context, width / 5.5, height / 7,
-                      const FaIcon(FontAwesomeIcons.four), "المرحلة الرابعة"),
-                  buttonCard(context, width / 5.5, height / 7,
-                      const FaIcon(FontAwesomeIcons.five), "المرحلة الخامسة"),
+                  buttonCard(
+                      context,
+                      width / 5.5,
+                      height / 7,
+                      const FaIcon(FontAwesomeIcons.four),
+                      "المرحلة الرابعة",
+                      () {}),
+                  buttonCard(
+                      context,
+                      width / 5.5,
+                      height / 7,
+                      const FaIcon(FontAwesomeIcons.five),
+                      "المرحلة الخامسة",
+                      () {}),
                 ],
-              )
+              ),
             ],
           ),
         ),

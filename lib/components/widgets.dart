@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 SizedBox sizedBox({width = 0.0, height = 0.0}) {
   return SizedBox(
@@ -12,6 +13,14 @@ ElevatedButton hotElevatedButton(onPressed, label) {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(minimumSize: const Size(350, 40)),
       child: Text(label));
+}
+
+ElevatedButton iconLabelButton(onPressed, label, icon) {
+  return ElevatedButton.icon(
+    onPressed: onPressed,
+    label: Text(label),
+    icon: FaIcon(icon),
+  );
 }
 
 Container primaryContainer(context, width, height, child) {
@@ -65,9 +74,9 @@ Container statContainer(context, width, height, stat, title, icon) {
   );
 }
 
-Widget buttonCard(context, width, height, icon, label) {
+Widget buttonCard(context, width, height, icon, label, onTap) {
   return GestureDetector(
-    onTap: () {},
+    onTap: onTap,
     child: Container(
       width: width,
       height: height,

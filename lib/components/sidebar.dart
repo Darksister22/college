@@ -7,8 +7,13 @@ SideBar sideBar = const SideBar(
   backgroundColor: Color(0xFFDBE2F9),
   items: [
     AdminMenuItem(
-        title: "الصفحة الرئيسية", icon: FontAwesomeIcons.houseChimney),
-    AdminMenuItem(title: "الطلبة الحاليين", icon: FontAwesomeIcons.users),
+        title: "الصفحة الرئيسية",
+        icon: FontAwesomeIcons.houseChimney,
+        route: '/home'),
+    AdminMenuItem(
+        title: "الطلبة الحاليين",
+        icon: FontAwesomeIcons.users,
+        route: '/studentmenu'),
     AdminMenuItem(title: "التدريسيين", icon: FontAwesomeIcons.userTie),
     AdminMenuItem(title: "الكورس الدراسي الحالي", icon: FontAwesomeIcons.book),
     AdminMenuItem(title: "درجات الطلبة", icon: FontAwesomeIcons.calculator),
@@ -16,6 +21,6 @@ SideBar sideBar = const SideBar(
         title: "الطلبة المتخرجن", icon: FontAwesomeIcons.graduationCap),
     AdminMenuItem(title: "ادارة الملفات", icon: FontAwesomeIcons.folder)
   ],
-  selectedRoute: '/',
+  selectedRoute: '/home',
   footer: Text("Add a footer"),
 );
