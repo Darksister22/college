@@ -1,5 +1,8 @@
+// ignore_for_file: unused_import
+
 import 'package:college/screens/home.dart';
 import 'package:college/screens/login.dart';
+import 'package:college/screens/studentmenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -65,6 +68,6 @@ class MyApp extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(10))),
             )),
             textTheme: GoogleFonts.almaraiTextTheme()),
-        home: const Home());
+        home: const StudentMenu());
   }
 }

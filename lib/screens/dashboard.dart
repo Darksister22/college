@@ -1,5 +1,5 @@
-import 'package:college/style/sidebar.dart';
-import 'package:college/style/widgets.dart';
+import 'package:college/components/sidebar.dart';
+import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

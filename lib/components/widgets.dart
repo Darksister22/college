@@ -64,3 +64,29 @@ Container statContainer(context, width, height, stat, title, icon) {
     ),
   );
 }
+
+Widget buttonCard(context, width, height, icon, label) {
+  return GestureDetector(
+    onTap: () {},
+    child: Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+        color: Theme.of(context).colorScheme.tertiaryContainer,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: [
+            icon,
+            sizedBox(width: 30.0),
+            Text(label,
+                style:
+                    const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ),
+    ),
+  );
+}

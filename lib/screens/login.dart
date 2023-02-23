@@ -1,7 +1,7 @@
-import 'package:college/style/customlogin.dart';
+import 'package:college/components/customlogin.dart';
 import 'package:college/style/formItems.dart';
-import 'package:college/style/text.dart';
-import 'package:college/style/widgets.dart';
+import 'package:college/components/text.dart';
+import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:college/screens/dashboard.dart';
-import 'package:college/style/widgets.dart';
+import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

@@ -9,3 +9,13 @@ Text onSecondaryContainer(context, label, size) {
         fontWeight: FontWeight.w800),
   );
 }
+
+Text mainSurface(context, label) {
+  return Text(
+    label,
+    style: TextStyle(
+        color: Theme.of(context).colorScheme.secondary,
+        fontWeight: FontWeight.w900,
+        fontSize: 25),
+  );
+}
