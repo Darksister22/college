@@ -17,6 +17,7 @@ class _HomeState extends State<Home> {
     double height = MediaQuery.of(context).size.height;
 
     return Dashboard(
+      selectedRoute: '/home',
       title: "نظام اللجنة الامتحانية",
       child: SingleChildScrollView(
         child: Padding(

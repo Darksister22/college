@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:college/screens/home.dart';
 import 'package:college/screens/login.dart';
 import 'package:college/screens/studentmenu.dart';
@@ -11,13 +9,13 @@ class Routes {
     switch (settings.name) {
       //the name sent from pushnamed
       case '/':
-        return MaterialPageRoute(builder: (context) => Login());
+        return MaterialPageRoute(builder: (context) => const Login());
       case '/studentmenu':
-        return MaterialPageRoute(builder: (context) => StudentMenu());
+        return MaterialPageRoute(builder: (context) => const StudentMenu());
       case '/home':
-        return MaterialPageRoute(builder: (context) => Home());
+        return MaterialPageRoute(builder: (context) => const Home());
       default:
-        return MaterialPageRoute(builder: (context) => Home());
+        return MaterialPageRoute(builder: (context) => const Home());
     }
   }
 }

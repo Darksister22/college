@@ -1,8 +1,10 @@
 import 'package:college/components/customlogin.dart';
-import 'package:college/style/formItems.dart';
+import 'package:college/components/formitems.dart';
 import 'package:college/components/text.dart';
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
+
+import '../API/apiconfig.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -55,9 +57,15 @@ class _LoginState extends State<Login> {
                     sizedBox(height: 30.0),
                     Row(
                       children: [
-                        hotElevatedButton(() {}, "تسجيل الدخول"),
+                        hotElevatedButton(() async {
+                          var response = await Api().dio.get("repos");
+                          List<dynamic> rows = response.data as List;
+                          print(rows);
+                        }, "تسجيل الدخول"),
                         sizedBox(width: 38.0),
-                        hotElevatedButton(() {}, "الدخول كضيف"),
+                        hotElevatedButton(() {
+                          Navigator.pushNamed(context, "/home");
+                        }, "الدخول كضيف"),
                       ],
                     )
                   ],

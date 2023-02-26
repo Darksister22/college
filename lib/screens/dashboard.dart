@@ -7,7 +7,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class Dashboard extends StatefulWidget {
   final String title;
   final Widget child;
-  const Dashboard({Key? key, required this.title, required this.child})
+  final selectedRoute;
+  const Dashboard(
+      {Key? key,
+      required this.title,
+      required this.child,
+      required this.selectedRoute})
       : super(key: key);
 
   @override
@@ -17,11 +22,13 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   late String title;
   late Widget child;
+  late var selectedRoute;
   @override
   void initState() {
     super.initState();
     title = widget.title;
     child = widget.child;
+    selectedRoute = widget.selectedRoute;
   }
 
   @override
@@ -39,7 +46,7 @@ class _DashboardState extends State<Dashboard> {
                 icon: const FaIcon(FontAwesomeIcons.doorOpen)),
           ],
         ),
-        sideBar: sideBar,
+        sideBar: sideBar(context, selectedRoute),
         body: child);
   }
 }
