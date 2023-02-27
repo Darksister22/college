@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 SizedBox sizedBox({width = 0.0, height = 0.0}) {
@@ -95,6 +96,43 @@ Widget buttonCard(context, width, height, icon, label, onTap) {
                     const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
           ],
         ),
+      ),
+    ),
+  );
+}
+
+Widget progressIndicator(context) {
+  return SizedBox(
+    height: MediaQuery.of(context).size.height / 1.3,
+    child: Center(
+      child: Column(
+        children: [
+          SpinKitPouringHourGlass(
+            color: Theme.of(context).primaryColor,
+          ),
+          const Text("يتم التحميل...")
+        ],
+      ),
+    ),
+  );
+}
+
+Widget errorIndicator(context, label) {
+  return SizedBox(
+    height: MediaQuery.of(context).size.height / 1.3,
+    child: Center(
+      child: Column(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.triangleExclamation,
+            color: Theme.of(context).colorScheme.error,
+          ),
+          Text(
+            label,
+            style:
+                TextStyle(color: Theme.of(context).colorScheme.errorContainer),
+          )
+        ],
       ),
     ),
   );

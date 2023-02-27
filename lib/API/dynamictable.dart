@@ -2,6 +2,7 @@ import 'package:advanced_datatable/advanced_datatable_source.dart';
 import 'package:advanced_datatable/datatable.dart';
 import 'package:college/API/apiconfig.dart';
 import 'package:college/components/formitems.dart';
+import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 
 typedef CellsCallback = List<DataCell> Function(dynamic currentRowData);
@@ -50,8 +51,9 @@ class _DynamicTableState extends State<DynamicTable> {
                     label: e.label, onSort: setSort, numeric: e.numeric))
                 .toList(),
             source: _source,
-            loadingWidget: () => Text("Loading"),
-            errorWidget: () => Text("حدث خطأ ما"),
+            loadingWidget: () => progressIndicator(context),
+            errorWidget: () => errorIndicator(
+                context, "حدث خطأ في التحميل, يرجى اعادة المحاولة"),
             addEmptyRows: false,
             showHorizontalScrollbarAlways: true,
             sortAscending: _sortAsc,

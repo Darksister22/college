@@ -30,6 +30,9 @@ SideBar sideBar(context, selectedRoute) {
     onSelected: (item) {
       Navigator.of(context).pushNamed(item.route!);
     },
-    footer: const Text("Add a footer"),
+    footer: Container(
+      color: Theme.of(context).colorScheme.tertiaryContainer,
+      child: const Text("نظام اللجنة  الامتحانية - جامعة النهرين"),
+    ),
   );
 }
