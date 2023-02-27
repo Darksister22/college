@@ -24,92 +24,77 @@ class _StudentMenuState extends State<StudentMenu> {
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          // child: Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     sizedBox(height: 30.0),
-          //     Row(
-          //       children: [
-          //         mainSurface(context, "الرجاء اختيار المرحلة لعرض الطلبة"),
-          //         const Spacer(),
-          //         iconLabelButton(() {
-          //           showDialog(
-          //               context: context, builder: (context) => AddStudent());
-          //         }, "طالب جديد", FontAwesomeIcons.plus),
-          //         sizedBox(width: 40.0)
-          //       ],
-          //     ),
-          //     sizedBox(height: 40.0),
-          //     Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //       children: [
-          //         buttonCard(
-          //             context,
-          //             width / 5.5,
-          //             height / 7,
-          //             const FaIcon(FontAwesomeIcons.one),
-          //             "المرحلة الاولى",
-          //             () {}),
-          //         buttonCard(
-          //             context,
-          //             width / 5.5,
-          //             height / 7,
-          //             const FaIcon(FontAwesomeIcons.two),
-          //             "المرحلة الثانية",
-          //             () {}),
-          //         buttonCard(
-          //             context,
-          //             width / 5.5,
-          //             height / 7,
-          //             const FaIcon(FontAwesomeIcons.three),
-          //             "المرحلة الثالثة",
-          //             () {}),
-          //       ],
-          //     ),
-          //     sizedBox(height: 30.0),
-          //     Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //       children: [
-          //         buttonCard(
-          //             context,
-          //             width / 5.5,
-          //             height / 7,
-          //             const FaIcon(FontAwesomeIcons.four),
-          //             "المرحلة الرابعة",
-          //             () {}),
-          //         buttonCard(
-          //             context,
-          //             width / 5.5,
-          //             height / 7,
-          //             const FaIcon(FontAwesomeIcons.five),
-          //             "المرحلة الخامسة",
-          //             () {}),
-          //       ],
-          //     ),
-          //   ],
-          // ),
-          child: DynamicTable(
-              source: DynamicDataTableSource(
-                  cells: (currentRowData) {
-                    return [
-                      dataCell(currentRowData["id"].toString()),
-                      dataCell(currentRowData["id"].toString()),
-                      dataCell(currentRowData["id"].toString()),
-                    ];
-                  },
-                  uri: "repos"),
-              columns: [
-                dataColumn("sequ", context),
-                dataColumn("sequ", context),
-                dataColumn("sequ", context),
-                // dataColumn(AppLocalizations.of(context)!.phone, context,
-                //     numeric: true),
-                // dataColumn(AppLocalizations.of(context)!.branch, context),
-                // dataColumn(AppLocalizations.of(context)!.credit, context,
-                //     numeric: true),
-                // dataColumn(AppLocalizations.of(context)!.debt, context,
-                //     numeric: true),
-              ]),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              sizedBox(height: 30.0),
+              Row(
+                children: [
+                  mainSurface(context, "الرجاء اختيار المرحلة لعرض الطلبة"),
+                  const Spacer(),
+                  iconLabelButton(() {
+                    showDialog(
+                        context: context, builder: (context) => AddStudent());
+                  }, "طالب جديد", FontAwesomeIcons.plus),
+                  sizedBox(width: 40.0)
+                ],
+              ),
+              sizedBox(height: 40.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  buttonCard(context, width / 3, height / 7,
+                      const FaIcon(FontAwesomeIcons.one), "المرحلة الاولى", () {
+                    Navigator.pushNamed(context, '/studenttable');
+                  }),
+                  buttonCard(
+                      context,
+                      width / 3,
+                      height / 7,
+                      const FaIcon(FontAwesomeIcons.two),
+                      "المرحلة الثانية", () {
+                    Navigator.pushNamed(context, '/studenttable');
+                  }),
+                ],
+              ),
+              sizedBox(height: 30.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  buttonCard(
+                      context,
+                      width / 3,
+                      height / 7,
+                      const FaIcon(FontAwesomeIcons.one),
+                      "المرحلة الثالثة", () {
+                    Navigator.pushNamed(context, '/studenttable');
+                  }),
+                  buttonCard(
+                      context,
+                      width / 3,
+                      height / 7,
+                      const FaIcon(FontAwesomeIcons.two),
+                      "المرحلة الرابعة", () {
+                    Navigator.pushNamed(context, '/studenttable');
+                  }),
+                ],
+              ),
+              sizedBox(height: 30.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  buttonCard(context, width / 3, height / 7,
+                      const FaIcon(FontAwesomeIcons.one), "الماجستير", () {
+                    Navigator.pushNamed(context, '/studenttable');
+                  }),
+                  buttonCard(context, width / 3, height / 7,
+                      const FaIcon(FontAwesomeIcons.two), "الدكتوراة", () {
+                    Navigator.pushNamed(context, '/studenttable');
+                  }),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

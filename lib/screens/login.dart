@@ -1,5 +1,7 @@
+import 'package:college/API/posts.dart';
 import 'package:college/components/customlogin.dart';
 import 'package:college/components/formitems.dart';
+import 'package:college/components/snackbar.dart';
 import 'package:college/components/text.dart';
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,8 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    TextEditingController email = TextEditingController();
+    TextEditingController password = TextEditingController();
     return Scaffold(
       body: Stack(
         children: [
@@ -58,9 +62,18 @@ class _LoginState extends State<Login> {
                     Row(
                       children: [
                         hotElevatedButton(() async {
-                          var response = await Api().dio.get("repos");
-                          List<dynamic> rows = response.data as List;
-                          print(rows);
+                          var res = await ApiPosts()
+                              .login(context, email.text, password.text);
+                          switch (res) {
+                            case '200':
+                              {
+                                // ignore: use_build_context_synchronously
+                                context.showSnackBar("تم تسجيل الدخول بنجاح");
+                                // ignore: use_build_context_synchronously
+                                Navigator.pushNamed(context,
+                                    "/home"); //TODO: This is temporary. Replace with provider.
+                              }
+                          }
                         }, "تسجيل الدخول"),
                         sizedBox(width: 38.0),
                         hotElevatedButton(() {

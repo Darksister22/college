@@ -20,7 +20,7 @@ class DynamicTable extends StatefulWidget {
 }
 
 class _DynamicTableState extends State<DynamicTable> {
-  final _rowsPerPage = 5;
+  final _rowsPerPage = 1;
   late DynamicDataTableSource _source; //the source of the data table.
   var _sortIndex = 0;
   var _sortAsc = true; //determine how to sort.
@@ -125,7 +125,7 @@ class _DynamicTableState extends State<DynamicTable> {
 
               return amountText;
             },
-            rowsPerPage: 5,
+            rowsPerPage: 1,
           ),
         ],
       ),
@@ -173,8 +173,7 @@ class DynamicDataTableSource extends AdvancedDataTableSource<dynamic> {
 
     if (response.statusCode == 200) {
       List<dynamic> rows = response.data as List;
-
-      return RemoteDataSourceDetails(5, rows,
+      return RemoteDataSourceDetails(1, rows,
           filteredRows: lastSearchTerm.isNotEmpty ? rows.length : null);
     } else {
       throw Exception('Unable to query remote server');

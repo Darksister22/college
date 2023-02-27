@@ -5,7 +5,8 @@ final List<String> _year = [
   'السنة الثانية',
   'السنة الثالثة',
   'السنة الرابعة',
-  'السنة الخامسة',
+  'الماجستير',
+  'الدكتوراة'
 ];
 
 class SelectLevels extends StatefulWidget {

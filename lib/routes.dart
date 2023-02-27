@@ -1,6 +1,7 @@
 import 'package:college/screens/home.dart';
 import 'package:college/screens/login.dart';
 import 'package:college/screens/studentmenu.dart';
+import 'package:college/screens/studenttable.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -12,6 +13,10 @@ class Routes {
         return MaterialPageRoute(builder: (context) => const Login());
       case '/studentmenu':
         return MaterialPageRoute(builder: (context) => const StudentMenu());
+      case '/studenttable':
+        return MaterialPageRoute(
+          builder: (context) => const StudentTable(),
+        );
       case '/home':
         return MaterialPageRoute(builder: (context) => const Home());
       default:
