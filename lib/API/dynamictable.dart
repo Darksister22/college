@@ -4,6 +4,7 @@ import 'package:college/API/apiconfig.dart';
 import 'package:college/components/formitems.dart';
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 typedef CellsCallback = List<DataCell> Function(dynamic currentRowData);
 
@@ -43,7 +44,8 @@ class _DynamicTableState extends State<DynamicTable> {
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: input(context, "البحث"),
+            child: input(context, "البحث",
+                icon: const FaIcon(FontAwesomeIcons.magnifyingGlass)),
           ),
           AdvancedPaginatedDataTable(
             columns: widget.columns

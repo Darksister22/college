@@ -1,3 +1,4 @@
+import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 
 TextFormField input(context, label,
@@ -14,13 +15,16 @@ inputDecor(context, label, {icon}) {
   return InputDecoration(
     fillColor: Theme.of(context).colorScheme.surface,
     filled: true,
-    suffixIcon: icon,
+    suffixIcon: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [sizedBox(height: 7.0), icon],
+    ),
     label: Text(label),
     labelStyle: const TextStyle(),
     enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15),
         borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.surface, width: 1.0)),
+            color: Theme.of(context).colorScheme.outline, width: 1.0)),
     focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15),
         borderSide: BorderSide(

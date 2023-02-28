@@ -5,6 +5,7 @@ import 'package:college/components/snackbar.dart';
 import 'package:college/components/text.dart';
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../API/apiconfig.dart';
 
@@ -55,9 +56,14 @@ class _LoginState extends State<Login> {
                     onSecondaryContainer(
                         context, "نظام اللجنة الامتحانية - جامعة النهرين", 25),
                     sizedBox(height: 60.0),
-                    input(context, "اسم المستخدم"),
+                    input(context, "اسم المستخدم",
+                        icon: const FaIcon(FontAwesomeIcons.user),
+                        controller: email),
                     sizedBox(height: 10.0),
-                    input(context, "كلمة السر", password: true),
+                    input(context, "كلمة السر",
+                        password: true,
+                        icon: const FaIcon(FontAwesomeIcons.key),
+                        controller: password),
                     sizedBox(height: 30.0),
                     Row(
                       children: [
