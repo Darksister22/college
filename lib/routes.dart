@@ -1,4 +1,5 @@
 import 'package:college/screens/home.dart';
+import 'package:college/screens/instructortable.dart';
 import 'package:college/screens/login.dart';
 import 'package:college/screens/studentmenu.dart';
 import 'package:college/screens/studenttable.dart';
@@ -13,6 +14,8 @@ class Routes {
         return MaterialPageRoute(builder: (context) => const Login());
       case '/studentmenu':
         return MaterialPageRoute(builder: (context) => const StudentMenu());
+      case '/instructortable':
+        return MaterialPageRoute(builder: (context) => const InstructorTable());
       case '/studenttable':
         return MaterialPageRoute(
           builder: (context) => const StudentTable(),

@@ -11,7 +11,7 @@ final List<String> _year = [
 
 class SelectLevels extends StatefulWidget {
   final String selYear;
-  SelectLevels({Key? key, required this.selYear}) : super(key: key);
+  const SelectLevels({Key? key, required this.selYear}) : super(key: key);
 
   @override
   State<SelectLevels> createState() => _SelectLevelsState();
@@ -29,7 +29,7 @@ class _SelectLevelsState extends State<SelectLevels> {
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       isExpanded: true,
-      hint: const Text('اختيار السنة الدراسية'),
+      hint: const Text('السنة الدراسية'),
       value: selYear,
       onChanged: (newValue) {
         setState(() {

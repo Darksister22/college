@@ -18,13 +18,11 @@ SideBar sideBar(context, selectedRoute) {
         icon: FontAwesomeIcons.users,
         route: '/studentmenu',
       ),
-      AdminMenuItem(title: "التدريسيين", icon: FontAwesomeIcons.userTie),
       AdminMenuItem(
-          title: "الكورس الدراسي الحالي", icon: FontAwesomeIcons.book),
-      AdminMenuItem(title: "درجات الطلبة", icon: FontAwesomeIcons.calculator),
-      AdminMenuItem(
-          title: "الطلبة المتخرجن", icon: FontAwesomeIcons.graduationCap),
-      AdminMenuItem(title: "ادارة الملفات", icon: FontAwesomeIcons.folder)
+          title: "التدريسيين",
+          icon: FontAwesomeIcons.userTie,
+          route: '/instructortable'),
+      AdminMenuItem(title: "المراحل الدراسية", icon: FontAwesomeIcons.book)
     ],
     selectedRoute: selectedRoute,
     onSelected: (item) {

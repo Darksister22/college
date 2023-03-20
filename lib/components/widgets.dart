@@ -137,3 +137,26 @@ Widget errorIndicator(context, label) {
     ),
   );
 }
+
+DataCell dataCell(text, {direction, color}) {
+  return DataCell(rowText(text, direction: direction, color: color));
+}
+
+DataColumn dataColumn(text, context, {numeric = false}) {
+  return DataColumn(label: colText(text, context), numeric: numeric);
+}
+
+Text rowText(text, {direction, color}) {
+  return Text(
+    text,
+    textDirection: direction,
+    style: TextStyle(fontSize: 20, color: color),
+  );
+}
+
+Text colText(text, context) {
+  return Text(
+    text,
+    style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 22),
+  );
+}

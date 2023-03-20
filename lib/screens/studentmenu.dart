@@ -83,8 +83,12 @@ class _StudentMenuState extends State<StudentMenu> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  buttonCard(context, width / 3, height / 7,
-                      const FaIcon(FontAwesomeIcons.book), "الماجستير", () {
+                  buttonCard(
+                      context,
+                      width / 3,
+                      height / 7,
+                      const FaIcon(FontAwesomeIcons.book),
+                      " الماجستير التحضيري", () {
                     Navigator.pushNamed(context, '/studenttable');
                   }),
                   buttonCard(
@@ -92,7 +96,7 @@ class _StudentMenuState extends State<StudentMenu> {
                       width / 3,
                       height / 7,
                       const FaIcon(FontAwesomeIcons.graduationCap),
-                      "الدكتوراة", () {
+                      "الدكتوراة التحضيري", () {
                     Navigator.pushNamed(context, '/studenttable');
                   }),
                 ],
