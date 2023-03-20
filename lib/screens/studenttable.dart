@@ -14,8 +14,6 @@ class StudentTable extends StatefulWidget {
 class _StudentTableState extends State<StudentTable> {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Dashboard(
       selectedRoute: '/studentmenu',
       title: "معلومات الطلبة",

@@ -28,7 +28,9 @@ class SelectYear extends StatelessWidget {
                 },
                 icon: const FaIcon(FontAwesomeIcons.x, size: 10)),
             ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/yearmenu');
+                },
                 icon: const FaIcon(FontAwesomeIcons.arrowLeft, size: 10),
                 label: Text('الذهاب'))
           ],

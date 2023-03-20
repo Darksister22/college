@@ -1,4 +1,3 @@
-import 'package:college/API/dynamictable.dart';
 import 'package:college/components/dialogues/studentdi.dart';
 import 'package:college/screens/dashboard.dart';
 import 'package:college/components/text.dart';
@@ -34,7 +33,8 @@ class _StudentMenuState extends State<StudentMenu> {
                   const Spacer(),
                   iconLabelButton(() {
                     showDialog(
-                        context: context, builder: (context) => AddStudent());
+                        context: context,
+                        builder: (context) => const AddStudent());
                   }, "طالب جديد", FontAwesomeIcons.plus),
                   sizedBox(width: 40.0)
                 ],

@@ -4,19 +4,19 @@ import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class InstructorTable extends StatefulWidget {
-  const InstructorTable({super.key});
+class CourseTable extends StatefulWidget {
+  const CourseTable({super.key});
 
   @override
-  State<InstructorTable> createState() => _InstructorTableState();
+  State<CourseTable> createState() => _CourseTableState();
 }
 
-class _InstructorTableState extends State<InstructorTable> {
+class _CourseTableState extends State<CourseTable> {
   @override
   Widget build(BuildContext context) {
     return Dashboard(
-      selectedRoute: '/instructortable',
-      title: "معلومات التدريسيين",
+      selectedRoute: '/levelmenu',
+      title: "مواد الكورس الاول",
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -24,16 +24,18 @@ class _InstructorTableState extends State<InstructorTable> {
               source: DynamicDataTableSource(
                   cells: (currentRowData) {
                     return [
-                      const DataCell(FaIcon(FontAwesomeIcons.pen)),
+                      const DataCell(FaIcon(FontAwesomeIcons.eye)),
                       dataCell(currentRowData["name_ar"].toString()),
                       dataCell(currentRowData["name_en"].toString()),
+                      dataCell(currentRowData["year"].toString()),
                     ];
                   },
-                  uri: "/api/instructors"),
+                  uri: "/api/courses"),
               columns: [
-                dataColumn("تعديل", context),
-                dataColumn("اسم التدريسي", context),
-                dataColumn("Instructor's Name", context),
+                dataColumn("عرض المعلومات", context),
+                dataColumn("اسم المادة", context),
+                dataColumn("Course Name", context),
+                dataColumn("السنة الدراسية", context),
               ]),
         ),
       ),
