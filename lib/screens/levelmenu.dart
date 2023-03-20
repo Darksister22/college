@@ -1,26 +1,27 @@
 import 'package:college/API/dynamictable.dart';
 import 'package:college/components/dialogues/studentdi.dart';
+import 'package:college/components/dialogues/yeardi.dart';
 import 'package:college/screens/dashboard.dart';
 import 'package:college/components/text.dart';
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class StudentMenu extends StatefulWidget {
-  const StudentMenu({super.key});
+class LevelMenu extends StatefulWidget {
+  const LevelMenu({super.key});
 
   @override
-  State<StudentMenu> createState() => _StudentMenuState();
+  State<LevelMenu> createState() => _LevelMenuState();
 }
 
-class _StudentMenuState extends State<StudentMenu> {
+class _LevelMenuState extends State<LevelMenu> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Dashboard(
-      selectedRoute: '/studentmenu',
-      title: "معلومات الطلبة",
+      selectedRoute: '/levelmenu',
+      title: "المراحل الدراسية",
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -30,12 +31,8 @@ class _StudentMenuState extends State<StudentMenu> {
               sizedBox(height: 30.0),
               Row(
                 children: [
-                  mainSurface(context, "الرجاء اختيار المرحلة لعرض الطلبة"),
+                  mainSurface(context, "الرجاء اختيار المرحلة لعرض معلوماتها"),
                   const Spacer(),
-                  iconLabelButton(() {
-                    showDialog(
-                        context: context, builder: (context) => AddStudent());
-                  }, "طالب جديد", FontAwesomeIcons.plus),
                   sizedBox(width: 40.0)
                 ],
               ),
@@ -45,7 +42,9 @@ class _StudentMenuState extends State<StudentMenu> {
                 children: [
                   buttonCard(context, width / 3, height / 7,
                       const FaIcon(FontAwesomeIcons.one), "المرحلة الاولى", () {
-                    Navigator.pushNamed(context, '/studenttable');
+                    showDialog(
+                        context: context,
+                        builder: (context) => const SelectYear());
                   }),
                   buttonCard(
                       context,
@@ -53,7 +52,9 @@ class _StudentMenuState extends State<StudentMenu> {
                       height / 7,
                       const FaIcon(FontAwesomeIcons.two),
                       "المرحلة الثانية", () {
-                    Navigator.pushNamed(context, '/studenttable');
+                    showDialog(
+                        context: context,
+                        builder: (context) => const SelectYear());
                   }),
                 ],
               ),
@@ -67,7 +68,9 @@ class _StudentMenuState extends State<StudentMenu> {
                       height / 7,
                       const FaIcon(FontAwesomeIcons.three),
                       "المرحلة الثالثة", () {
-                    Navigator.pushNamed(context, '/studenttable');
+                    showDialog(
+                        context: context,
+                        builder: (context) => const SelectYear());
                   }),
                   buttonCard(
                       context,
@@ -75,7 +78,9 @@ class _StudentMenuState extends State<StudentMenu> {
                       height / 7,
                       const FaIcon(FontAwesomeIcons.four),
                       "المرحلة الرابعة", () {
-                    Navigator.pushNamed(context, '/studenttable');
+                    showDialog(
+                        context: context,
+                        builder: (context) => const SelectYear());
                   }),
                 ],
               ),
@@ -89,7 +94,9 @@ class _StudentMenuState extends State<StudentMenu> {
                       height / 7,
                       const FaIcon(FontAwesomeIcons.book),
                       " الماجستير التحضيري", () {
-                    Navigator.pushNamed(context, '/studenttable');
+                    showDialog(
+                        context: context,
+                        builder: (context) => const SelectYear());
                   }),
                   buttonCard(
                       context,
@@ -97,7 +104,9 @@ class _StudentMenuState extends State<StudentMenu> {
                       height / 7,
                       const FaIcon(FontAwesomeIcons.graduationCap),
                       "الدكتوراة التحضيري", () {
-                    Navigator.pushNamed(context, '/studenttable');
+                    showDialog(
+                        context: context,
+                        builder: (context) => const SelectYear());
                   }),
                 ],
               ),

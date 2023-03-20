@@ -22,7 +22,10 @@ SideBar sideBar(context, selectedRoute) {
           title: "التدريسيين",
           icon: FontAwesomeIcons.userTie,
           route: '/instructortable'),
-      AdminMenuItem(title: "المراحل الدراسية", icon: FontAwesomeIcons.book)
+      AdminMenuItem(
+          title: "المراحل الدراسية",
+          icon: FontAwesomeIcons.book,
+          route: '/levelmenu')
     ],
     selectedRoute: selectedRoute,
     onSelected: (item) {
