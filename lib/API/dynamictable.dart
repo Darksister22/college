@@ -172,7 +172,6 @@ class DynamicDataTableSource extends AdvancedDataTableSource<dynamic> {
     NextPageRequest pageRequest,
   ) async {
     var response = await Api().dio.get(uri);
-
     if (response.statusCode == 200) {
       List<dynamic> rows = response.data as List;
       return RemoteDataSourceDetails(1, rows,

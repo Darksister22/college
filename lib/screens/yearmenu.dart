@@ -1,4 +1,3 @@
-import 'package:college/components/dialogues/studentdi.dart';
 import 'package:college/screens/dashboard.dart';
 import 'package:college/components/text.dart';
 import 'package:college/components/widgets.dart';

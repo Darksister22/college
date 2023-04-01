@@ -6,6 +6,7 @@ import 'package:college/components/text.dart';
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -18,9 +19,19 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    final formKey = GlobalKey<FormState>();
     double height = MediaQuery.of(context).size.height;
     TextEditingController email = TextEditingController();
     TextEditingController password = TextEditingController();
+    void showSnackbar(String message, {bool isError = false}) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: isError ? Colors.red : Colors.green,
+        ),
+      );
+    } //TODO: Maybe change its location since it's gonna be used elsewhere, i'm 100% sure.
+
     return Scaffold(
       body: Stack(
         children: [
@@ -48,45 +59,57 @@ class _LoginState extends State<Login> {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Form(
+                    key: formKey,
                     child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    onSecondaryContainer(
-                        context, "نظام اللجنة الامتحانية - جامعة النهرين", 25),
-                    sizedBox(height: 60.0),
-                    input(context, "اسم المستخدم",
-                        icon: const FaIcon(FontAwesomeIcons.user),
-                        controller: email),
-                    sizedBox(height: 10.0),
-                    input(context, "كلمة السر",
-                        password: true,
-                        icon: const FaIcon(FontAwesomeIcons.key),
-                        controller: password),
-                    sizedBox(height: 30.0),
-                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        hotElevatedButton(() async {
-                          var res = await ApiPosts()
-                              .login(context, email.text, password.text);
-                          switch (res) {
-                            case '200':
-                              {
-                                // ignore: use_build_context_synchronously
-                                context.showSnackBar("تم تسجيل الدخول بنجاح");
-                                // ignore: use_build_context_synchronously
-                                Navigator.pushNamed(context,
-                                    "/home"); //TODO: This is temporary. Replace with provider.
-                              }
+                        onSecondaryContainer(context,
+                            "نظام اللجنة الامتحانية - جامعة النهرين", 25),
+                        sizedBox(height: 60.0),
+                        input(context, "البريد الالكتروني",
+                            icon: const FaIcon(FontAwesomeIcons.user),
+                            valiator: (val) {
+                          if (val == null || val.isEmpty) {
+                            return 'الرجاء ادخال البريد الالكتروني';
                           }
-                        }, "تسجيل الدخول"),
-                        sizedBox(width: 38.0),
-                        hotElevatedButton(() {
-                          Navigator.pushNamed(context, "/home");
-                        }, "الدخول كضيف"),
+                          return null;
+                        }, controller: email),
+                        sizedBox(height: 10.0),
+                        input(context, "كلمة السر", password: true,
+                            valiator: (val) {
+                          if (val == null || val.isEmpty) {
+                            return 'الرجاء ادخال كلمة السر';
+                          }
+                          return null;
+                        },
+                            icon: const FaIcon(FontAwesomeIcons.key),
+                            controller: password),
+                        sizedBox(height: 30.0),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              hotElevatedButton(() async {
+                                if (formKey.currentState!.validate()) {
+                                  //TODO: Add a loading widget.
+                                  try {
+                                    await ApiPosts().login(context, email.text,
+                                        password.text, showSnackbar);
+                                  } catch (e) {
+                                    context.showSnackBar(
+                                        "حدث خطأ ما, يرجى اعادة المحاولة لاحقاً",
+                                        isError: true);
+                                  }
+                                }
+                              }, "تسجيل الدخول"),
+                              sizedBox(width: 38.0),
+                              hotElevatedButton(() {
+                                Navigator.pushNamed(context, "/home");
+                              }, "الدخول كضيف"),
+                            ],
+                          ),
+                        )
                       ],
-                    )
-                  ],
-                )),
+                    )),
               ),
             ),
           )

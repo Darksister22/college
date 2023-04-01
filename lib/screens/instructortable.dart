@@ -29,7 +29,7 @@ class _InstructorTableState extends State<InstructorTable> {
                       dataCell(currentRowData["name_en"].toString()),
                     ];
                   },
-                  uri: "/api/instructors"),
+                  uri: "instructors"),
               columns: [
                 dataColumn("تعديل", context),
                 dataColumn("اسم التدريسي", context),

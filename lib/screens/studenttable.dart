@@ -30,7 +30,7 @@ class _StudentTableState extends State<StudentTable> {
                       dataCell(currentRowData["year"].toString()),
                     ];
                   },
-                  uri: "/api/students"),
+                  uri: "students"),
               columns: [
                 dataColumn("تعديل", context),
                 dataColumn("اسم الطالب", context),
