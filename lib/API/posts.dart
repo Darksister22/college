@@ -16,6 +16,7 @@ class ApiPosts {
         SharedPreferences localStorage = await SharedPreferences.getInstance();
         await localStorage.setString('token', response.data['access_token']);
         await localStorage.setString('role', response.data['role']);
+        Api().setToken(localStorage.getString('token')!);
         showSnackBar("تم تسجيل الدخول بنجاح");
         Navigator.pushNamed(context, '/home');
       } else if (response.statusCode == 401) {
@@ -26,6 +27,18 @@ class ApiPosts {
       }
     } catch (e) {
       showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+    }
+  }
+
+  Future createInstructor(
+      String nameAr, String nameEn, Function showSnackBar) async {
+    var data = {'name_ar': nameAr, "name_en": nameEn};
+    try {
+      final res = await Api().dio.post('instructors/create', data: data);
+      print(res.statusCode);
+      showSnackBar("تم اضافة التدريسي بنجاح");
+    } catch (e) {
+      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة");
     }
   }
 }

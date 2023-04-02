@@ -1,5 +1,6 @@
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 TextFormField input(context, label,
     {controller, valiator, password = false, icon}) {
@@ -7,7 +8,8 @@ TextFormField input(context, label,
     controller: controller,
     validator: valiator,
     obscureText: password,
-    decoration: inputDecor(context, label, icon: icon),
+    decoration: inputDecor(context, label,
+        icon: icon ?? const FaIcon(FontAwesomeIcons.file)),
   );
 }
 
@@ -30,6 +32,10 @@ inputDecor(context, label, {icon}) {
         borderSide: BorderSide(
             color: Theme.of(context).colorScheme.secondary, width: 1.0)),
     errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide:
+            BorderSide(color: Theme.of(context).colorScheme.error, width: 1.0)),
+    focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15),
         borderSide:
             BorderSide(color: Theme.of(context).colorScheme.error, width: 1.0)),

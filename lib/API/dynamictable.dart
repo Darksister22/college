@@ -140,7 +140,7 @@ class _DynamicTableState extends State<DynamicTable> {
 
               return amountText;
             },
-            rowsPerPage: 1,
+            rowsPerPage: 4,
           ),
         ],
       ),
@@ -187,7 +187,7 @@ class DynamicDataTableSource extends AdvancedDataTableSource<dynamic> {
     var response = await Api().dio.get(uri);
     if (response.statusCode == 200) {
       List<dynamic> rows = response.data as List;
-      return RemoteDataSourceDetails(1, rows,
+      return RemoteDataSourceDetails(4, rows,
           filteredRows: lastSearchTerm.isNotEmpty ? rows.length : null);
     } else {
       throw Exception('Unable to query remote server');

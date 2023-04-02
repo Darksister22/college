@@ -10,5 +10,18 @@ class Api {
       "Content-Type": "application/json",
     },
   );
-  Dio dio = Dio(_baseOptions);
+
+  static final Api _instance = Api._internal();
+  factory Api() => _instance;
+  Api._internal() {
+    _dio = Dio(_baseOptions);
+  }
+
+  late Dio _dio;
+
+  void setToken(String token) {
+    _dio.options.headers['Authorization'] = 'Bearer $token';
+  }
+
+  Dio get dio => _dio;
 }
