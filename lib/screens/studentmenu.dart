@@ -4,6 +4,7 @@ import 'package:college/components/text.dart';
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StudentMenu extends StatefulWidget {
   const StudentMenu({super.key});
@@ -13,10 +14,13 @@ class StudentMenu extends StatefulWidget {
 }
 
 class _StudentMenuState extends State<StudentMenu> {
+  bool isGuest = true;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
     return Dashboard(
       selectedRoute: '/studentmenu',
       title: "معلومات الطلبة",
@@ -31,11 +35,14 @@ class _StudentMenuState extends State<StudentMenu> {
                 children: [
                   mainSurface(context, "الرجاء اختيار المرحلة لعرض الطلبة"),
                   const Spacer(),
-                  iconLabelButton(() {
-                    showDialog(
-                        context: context,
-                        builder: (context) => const AddStudent());
-                  }, "طالب جديد", FontAwesomeIcons.plus),
+                  // Visibility(
+                  //   //              visible: checkGuest(),
+                  //   child: iconLabelButton(() {
+                  //     showDialog(
+                  //         context: context,
+                  //         builder: (context) => const AddStudent());
+                  //   }, "طالب جديد", FontAwesomeIcons.plus),
+                  // ),
                   sizedBox(width: 40.0)
                 ],
               ),

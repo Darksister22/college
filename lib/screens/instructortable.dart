@@ -21,6 +21,8 @@ class _InstructorTableState extends State<InstructorTable> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: DynamicTable(
+              add: () {},
+              label: "اضافة تدريسي جديد",
               source: DynamicDataTableSource(
                   cells: (currentRowData) {
                     return [
@@ -31,7 +33,7 @@ class _InstructorTableState extends State<InstructorTable> {
                   },
                   uri: "instructors"),
               columns: [
-                dataColumn("تعديل", context),
+                dataColumn("تعديل المعلومات", context),
                 dataColumn("اسم التدريسي", context),
                 dataColumn("Instructor's Name", context),
               ]),

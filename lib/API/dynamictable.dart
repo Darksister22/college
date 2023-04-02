@@ -9,13 +9,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 typedef CellsCallback = List<DataCell> Function(dynamic currentRowData);
 
 class DynamicTable extends StatefulWidget {
-  const DynamicTable({
-    super.key,
-    required this.source,
-    required this.columns,
-  });
+  const DynamicTable(
+      {super.key,
+      required this.source,
+      required this.columns,
+      required this.add,
+      required this.label});
   final DynamicDataTableSource source;
   final List<DataColumn> columns;
+  final Function add;
+  final String label;
   @override
   State<DynamicTable> createState() => _DynamicTableState();
 }
@@ -42,10 +45,20 @@ class _DynamicTableState extends State<DynamicTable> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: input(context, "البحث",
-                icon: const FaIcon(FontAwesomeIcons.magnifyingGlass)),
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: input(context, "البحث",
+                        controller: _searchController,
+                        icon: const FaIcon(FontAwesomeIcons.magnifyingGlass)),
+                  ),
+                ),
+                iconLabelButton(widget.add, widget.label, FontAwesomeIcons.plus)
+              ],
+            ),
           ),
           AdvancedPaginatedDataTable(
             columns: widget.columns

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 SizedBox sizedBox({width = 0.0, height = 0.0}) {
   return SizedBox(
@@ -159,4 +160,9 @@ Text colText(text, context) {
     text,
     style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 22),
   );
+}
+
+Future<bool> checkGuest() async {
+  SharedPreferences localStorage = await SharedPreferences.getInstance();
+  return localStorage.getString('token') == null;
 }

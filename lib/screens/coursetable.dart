@@ -21,6 +21,8 @@ class _CourseTableState extends State<CourseTable> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: DynamicTable(
+              add: () {},
+              label: "اضافة كورس جديد",
               source: DynamicDataTableSource(
                   cells: (currentRowData) {
                     return [

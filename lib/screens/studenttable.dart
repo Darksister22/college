@@ -21,6 +21,8 @@ class _StudentTableState extends State<StudentTable> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: DynamicTable(
+              add: () {},
+              label: "اضافة طالب جديد",
               source: DynamicDataTableSource(
                   cells: (currentRowData) {
                     return [
@@ -32,7 +34,7 @@ class _StudentTableState extends State<StudentTable> {
                   },
                   uri: "students"),
               columns: [
-                dataColumn("تعديل", context),
+                dataColumn("تعديل المعلومات", context),
                 dataColumn("اسم الطالب", context),
                 dataColumn("Student's Name", context),
                 dataColumn("Year", context),
