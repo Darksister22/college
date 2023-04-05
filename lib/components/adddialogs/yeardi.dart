@@ -1,4 +1,3 @@
-import 'package:college/components/formitems.dart';
 import 'package:college/components/selectlists.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -32,7 +31,7 @@ class SelectYear extends StatelessWidget {
                   Navigator.pushNamed(context, '/yearmenu');
                 },
                 icon: const FaIcon(FontAwesomeIcons.arrowLeft, size: 10),
-                label: Text('الذهاب'))
+                label: const Text('الذهاب'))
           ],
         );
       },

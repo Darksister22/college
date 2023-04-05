@@ -40,7 +40,7 @@ class ApiPosts {
         showSnackBar("تم اضافة التدريسي بنجاح");
       }
     } catch (e) {
-      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة");
+      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
     }
   }
 
@@ -54,12 +54,45 @@ class ApiPosts {
     };
     try {
       final res = await Api().dio.post('students/create/', data: data);
-      print(res.statusCode);
       if (res.statusCode == 200) {
         showSnackBar("تم اضافة الطالب بنجاح");
+      } else {
+        showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
       }
     } catch (e) {
-      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة");
+      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+    }
+  }
+
+  Future editInstructor(context, String id, String nameAr, String nameEn,
+      Function showSnackBar) async {
+    var data = {"id": id, "name_ar": nameAr, "name_en": nameEn};
+    try {
+      var res = await Api().dio.post('instructors/update', data: data);
+      if (res.statusCode == 200) {
+        Navigator.pushNamed(context, "/instructortable");
+        showSnackBar("تم تحديث المعلومات بنجاح");
+      } else {
+        print(res.statusCode);
+        showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+      }
+    } catch (e) {
+      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+    }
+  }
+
+  Future destroyInstructor(context, String id, Function showSnackBar) async {
+    try {
+      var res = await Api().dio.post('instructors/destroy/$id');
+      print(res.statusCode);
+      if (res.statusCode == 200) {
+        Navigator.pushNamed(context, "/instructortable");
+        showSnackBar("تم حذف التدريسي بنجاح");
+      } else if (res.statusCode == 409) {
+        showSnackBar("لا يمكن حذف تدريسي لديه مواد حالية", isError: true);
+      }
+    } catch (e) {
+      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
     }
   }
 }

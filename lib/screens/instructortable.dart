@@ -1,5 +1,6 @@
 import 'package:college/API/dynamictable.dart';
-import 'package:college/components/dialogues/instructordi.dart';
+import 'package:college/components/adddialogs/instructordi.dart';
+import 'package:college/components/editdialogs/editinstuctor.dart';
 import 'package:college/screens/dashboard.dart';
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
@@ -24,17 +25,24 @@ class _InstructorTableState extends State<InstructorTable> {
           child: DynamicTable(
               add: () {
                 showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const AddInstructor();
-                  },
-                );
+                    context: context,
+                    builder: (context) {
+                      return const AddInstructor();
+                    });
               },
               label: "اضافة تدريسي جديد",
               source: DynamicDataTableSource(
                   cells: (currentRowData) {
                     return [
-                      const DataCell(FaIcon(FontAwesomeIcons.pen)),
+                      DataCell(IconButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return EditInstructor(data: currentRowData);
+                                });
+                          },
+                          icon: const FaIcon(FontAwesomeIcons.pen))),
                       dataCell(currentRowData["name_ar"].toString()),
                       dataCell(currentRowData["name_en"].toString()),
                     ];

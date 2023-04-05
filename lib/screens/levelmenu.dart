@@ -1,4 +1,4 @@
-import 'package:college/components/dialogues/yeardi.dart';
+import 'package:college/components/adddialogs/yeardi.dart';
 import 'package:college/screens/dashboard.dart';
 import 'package:college/components/text.dart';
 import 'package:college/components/widgets.dart';

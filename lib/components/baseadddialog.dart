@@ -2,14 +2,14 @@ import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class BaseDialog extends StatefulWidget {
+class BaseAddDialog extends StatefulWidget {
   final Function func;
   final List<Widget> children;
   final String label;
   final IconData icon;
   final String title;
   final Key formKey;
-  const BaseDialog(
+  const BaseAddDialog(
       {super.key,
       required this.func,
       required this.label,
@@ -19,10 +19,10 @@ class BaseDialog extends StatefulWidget {
       required this.children});
 
   @override
-  State<BaseDialog> createState() => _BaseDialogState();
+  State<BaseAddDialog> createState() => _BaseAddDialogState();
 }
 
-class _BaseDialogState extends State<BaseDialog> {
+class _BaseAddDialogState extends State<BaseAddDialog> {
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(

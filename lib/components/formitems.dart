@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 TextFormField input(context, label,
-    {controller, valiator, password = false, icon}) {
+    {controller, valiator, password = false, icon, enabled = true}) {
   return TextFormField(
     controller: controller,
     validator: valiator,
     obscureText: password,
+    enabled: enabled,
     decoration: inputDecor(context, label,
         icon: icon ?? const FaIcon(FontAwesomeIcons.file)),
   );

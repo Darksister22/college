@@ -1,5 +1,5 @@
 import 'package:college/API/posts.dart';
-import 'package:college/components/dialogues/basedialog.dart';
+import 'package:college/components/baseadddialog.dart';
 import 'package:college/components/formitems.dart';
 import 'package:college/components/selectlists.dart';
 import 'package:college/components/widgets.dart';
@@ -30,7 +30,7 @@ class AddStudent extends StatelessWidget {
       return null;
     }
 
-    return BaseDialog(
+    return BaseAddDialog(
         formKey: formkey,
         title: "اضافة طالب جديد",
         func: () async {
