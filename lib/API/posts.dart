@@ -50,7 +50,7 @@ class ApiPosts {
       "name_ar": nameAr,
       "name_en": nameEn,
       "year": translateYearAE(selYear),
-      'level': 'master' //TODO: Remove level entirely from API.
+      'level': 'bachaelor' //TODO: Remove level entirely from API.
     };
     try {
       final res = await Api().dio.post('students/create/', data: data);
@@ -84,7 +84,6 @@ class ApiPosts {
   Future destroyInstructor(context, String id, Function showSnackBar) async {
     try {
       var res = await Api().dio.post('instructors/destroy/$id');
-      print(res.statusCode);
       if (res.statusCode == 200) {
         Navigator.pushNamed(context, "/instructortable");
         showSnackBar("تم حذف التدريسي بنجاح");
@@ -93,6 +92,56 @@ class ApiPosts {
       }
     } catch (e) {
       showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+    }
+  }
+
+  Future editStudent(context, String id, String nameAr, String nameEn,
+      String year, Function showSnackBar) async {
+    var data = {
+      "id": id,
+      "name_ar": nameAr,
+      "name_en": nameEn,
+      "year": year,
+      "level": "bachaelor"
+    };
+    try {
+      var res = await Api().dio.post('students/update', data: data);
+      if (res.statusCode == 200) {
+        Navigator.pushNamed(context, "/studenttable");
+        showSnackBar("تم تحديث المعلومات بنجاح");
+      } else {
+        showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+      }
+    } catch (e) {
+      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+    }
+  }
+
+  Future destroyStudent(context, String id, Function showSnackBar) async {
+    try {
+      var res = await Api().dio.post('students/destroy/$id');
+      if (res.statusCode == 200) {
+        Navigator.pushNamed(context, "/studentstable");
+        showSnackBar("تم حذف الطالب بنجاح");
+      } else {
+        showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+      }
+    } catch (e) {
+      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+    }
+  }
+
+  Future removeStudent(context, String id, Function showSnackBar) async {
+    try {
+      var res = await Api().dio.post("students/remove/$id");
+      if (res.statusCode == 200) {
+        showSnackBar('تم قطع العلاقة مع الطالب بنجاح');
+        Navigator.pushNamed(context, "/studentstable");
+      } else {
+        showSnackBar("حدث خطأ ما يرجى اعادة المحاولة", isError: true);
+      }
+    } catch (e) {
+      showSnackBar("حدث خطأ ما يرجى اعادة المحاولة", isError: true);
     }
   }
 }

@@ -1,18 +1,28 @@
-import 'package:college/components/baseadddialog.dart';
+import 'package:college/API/posts.dart';
 import 'package:college/components/formitems.dart';
 import 'package:college/components/selectlists.dart';
 import 'package:college/components/widgets.dart';
+import 'package:college/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class EditStudent extends StatelessWidget {
-  const EditStudent({super.key});
+class EditStudent extends StatefulWidget {
+  final dynamic data;
+  const EditStudent({super.key, this.data});
 
   @override
+  State<EditStudent> createState() => _EditStudentState();
+}
+
+class _EditStudentState extends State<EditStudent> {
+  @override
   Widget build(BuildContext context) {
-    String selYear = 'السنة الاولى';
-    TextEditingController nameAr = TextEditingController();
-    TextEditingController nameEn = TextEditingController();
+    String selYear = translateYearEA(widget.data['year']);
+    TextEditingController nameAr =
+        TextEditingController(text: widget.data['name_ar']);
+    TextEditingController nameEn =
+        TextEditingController(text: widget.data['name_en']);
+    bool edit = false;
     void showSnackBar(String message, {bool isError = false}) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -65,7 +75,32 @@ class EditStudent extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 icon: const FaIcon(FontAwesomeIcons.x)),
-            iconLabelButton(() {}, "حفظ التغييرات", FontAwesomeIcons.floppyDisk)
+            iconLabelButton(
+                () {}, "عرض معدلات الطالب", FontAwesomeIcons.trashCan),
+            iconLabelButton(() {
+              setState(() => edit = !edit);
+            }, "تعديل المعلومات", FontAwesomeIcons.userPen),
+            iconLabelButton(
+                () {}, "اضافة الطالب الى مادة", FontAwesomeIcons.userPlus),
+            iconLabelButton(() async {
+              await ApiPosts().removeStudent(
+                  context, widget.data['id'].toString(), showSnackBar);
+            }, "قطع العلاقة", FontAwesomeIcons.userXmark),
+            iconLabelButton(() async {
+              await ApiPosts().destroyStudent(
+                  context, widget.data['id'].toString(), showSnackBar);
+            }, "حذف الطالب", FontAwesomeIcons.trashCan),
+            iconLabelButton(() async {
+              if (formkey.currentState!.validate()) {
+                await ApiPosts().editStudent(
+                    context,
+                    widget.data['id'].toString(),
+                    nameAr.text,
+                    nameEn.text,
+                    translateYearAE(selYear),
+                    showSnackBar);
+              }
+            }, "حفظ التغييرات", FontAwesomeIcons.floppyDisk)
           ],
         );
       },
