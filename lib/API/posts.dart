@@ -144,4 +144,13 @@ class ApiPosts {
       showSnackBar("حدث خطأ ما يرجى اعادة المحاولة", isError: true);
     }
   }
+
+  Future getCurrentAverage(id) async {
+    try {
+      var res = await Api().dio.get('students/getCurAvg?id=$id');
+      return (res.data);
+    } catch (e) {
+      return "";
+    }
+  }
 }

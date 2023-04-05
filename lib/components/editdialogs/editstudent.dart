@@ -2,6 +2,7 @@ import 'package:college/API/posts.dart';
 import 'package:college/components/formitems.dart';
 import 'package:college/components/selectlists.dart';
 import 'package:college/components/widgets.dart';
+import 'package:college/screens/averages.dart';
 import 'package:college/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -75,8 +76,14 @@ class _EditStudentState extends State<EditStudent> {
                   Navigator.pop(context);
                 },
                 icon: const FaIcon(FontAwesomeIcons.x)),
-            iconLabelButton(
-                () {}, "عرض معدلات الطالب", FontAwesomeIcons.trashCan),
+            iconLabelButton(() {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return Averages(data: widget.data);
+                },
+              );
+            }, "عرض معدلات الطالب", FontAwesomeIcons.trashCan),
             iconLabelButton(() {
               setState(() => edit = !edit);
             }, "تعديل المعلومات", FontAwesomeIcons.userPen),
