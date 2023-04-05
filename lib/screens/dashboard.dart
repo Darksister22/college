@@ -3,6 +3,7 @@ import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
   final String title;
@@ -42,7 +43,12 @@ class _DashboardState extends State<Dashboard> {
                 onPressed: () {}, icon: const FaIcon(FontAwesomeIcons.gear)),
             sizedBox(width: 5.0),
             IconButton(
-                onPressed: () {},
+                onPressed: () async {
+                  SharedPreferences preferences =
+                      await SharedPreferences.getInstance();
+                  await preferences.clear();
+                  Navigator.pushNamed(context, '/');
+                },
                 icon: const FaIcon(FontAwesomeIcons.doorOpen)),
           ],
         ),

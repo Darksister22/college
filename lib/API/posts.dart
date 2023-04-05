@@ -1,4 +1,5 @@
 import 'package:college/API/apiconfig.dart';
+import 'package:college/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,8 +36,28 @@ class ApiPosts {
     var data = {'name_ar': nameAr, "name_en": nameEn};
     try {
       final res = await Api().dio.post('instructors/create', data: data);
+      if (res.statusCode == 200) {
+        showSnackBar("تم اضافة التدريسي بنجاح");
+      }
+    } catch (e) {
+      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة");
+    }
+  }
+
+  Future createStudent(String nameAr, String nameEn, String selYear,
+      Function showSnackBar) async {
+    var data = {
+      "name_ar": nameAr,
+      "name_en": nameEn,
+      "year": translateYearAE(selYear),
+      'level': 'master' //TODO: Remove level entirely from API.
+    };
+    try {
+      final res = await Api().dio.post('students/create/', data: data);
       print(res.statusCode);
-      showSnackBar("تم اضافة التدريسي بنجاح");
+      if (res.statusCode == 200) {
+        showSnackBar("تم اضافة الطالب بنجاح");
+      }
     } catch (e) {
       showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة");
     }

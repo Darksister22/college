@@ -30,6 +30,27 @@ class _SelectLevelsState extends State<SelectLevels> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
+      decoration: InputDecoration(
+        fillColor: Theme.of(context).colorScheme.surface,
+        filled: true,
+        labelStyle: const TextStyle(),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.outline, width: 1.0)),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.secondary, width: 1.0)),
+        errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.error, width: 1.0)),
+        focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.error, width: 1.0)),
+      ),
       isExpanded: true,
       hint: const Text('المرحلة الدراسية'),
       value: selYear,

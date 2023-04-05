@@ -24,7 +24,7 @@ class DynamicTable extends StatefulWidget {
 }
 
 class _DynamicTableState extends State<DynamicTable> {
-  final _rowsPerPage = 1;
+  var _rowsPerPage = AdvancedPaginatedDataTable.defaultRowsPerPage;
   late DynamicDataTableSource _source; //the source of the data table.
   var _sortIndex = 0;
   var _sortAsc = true; //determine how to sort.
@@ -61,68 +61,30 @@ class _DynamicTableState extends State<DynamicTable> {
             ),
           ),
           AdvancedPaginatedDataTable(
-            columns: widget.columns
-                .map((e) => DataColumn(
-                    label: e.label, onSort: setSort, numeric: e.numeric))
-                .toList(),
-            source: _source,
-            loadingWidget: () => progressIndicator(context),
-            errorWidget: () => errorIndicator(
-                context, "حدث خطأ في التحميل, يرجى اعادة المحاولة"),
             addEmptyRows: false,
+            source: _source,
             showHorizontalScrollbarAlways: true,
             sortAscending: _sortAsc,
             sortColumnIndex: _sortIndex,
             showFirstLastButtons: true,
-            customTableFooter: (source, offset) {
-              const maxPagesToShow = 4;
-              const maxPagesBeforeCurrent = 1;
-              final lastRequestDetails = source.lastDetails!;
-              final rowsForPager = lastRequestDetails.filteredRows ??
-                  lastRequestDetails.totalRows;
-              final totalPages = rowsForPager ~/ _rowsPerPage;
-              final currentPage = (offset ~/ _rowsPerPage) + 1;
-              List<int> pageList = [];
-              if (currentPage > 1) {
-                pageList.addAll(
-                  List.generate(currentPage - 1, (index) => index + 1),
-                );
-                //Keep up to 3 pages before current in the list
-                pageList.removeWhere(
-                  (element) => element < currentPage - maxPagesBeforeCurrent,
-                );
+            rowsPerPage: _rowsPerPage,
+            availableRowsPerPage: const [10],
+            onRowsPerPageChanged: (newRowsPerPage) {
+              if (newRowsPerPage != null) {
+                setState(() {
+                  _rowsPerPage = newRowsPerPage;
+                });
               }
-              pageList.add(currentPage);
-              //Add reminding pages after current to the list
-              pageList.addAll(
-                List.generate(
-                  maxPagesToShow - (pageList.length - 1),
-                  (index) => (currentPage + 1) + index,
-                ),
-              );
-              pageList.removeWhere((element) => element > totalPages);
-
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: pageList
-                    .map(
-                      (e) => TextButton(
-                        onPressed: e != currentPage
-                            ? () {
-                                //Start index is zero based
-                                source.setNextView(
-                                  startIndex: (e - 1) * _rowsPerPage,
-                                );
-                              }
-                            : null,
-                        child: Text(
-                          e.toString(),
-                        ),
-                      ),
-                    )
-                    .toList(),
-              );
             },
+            columns: widget.columns
+                .map((e) => DataColumn(
+                    label: e.label, onSort: setSort, numeric: e.numeric))
+                .toList(),
+
+            loadingWidget: () => progressIndicator(context),
+            errorWidget: () => errorIndicator(
+                context, "حدث خطأ في التحميل, يرجى اعادة المحاولة"),
+            //Optianl override to support custom data row text / translation
             getFooterRowText:
                 (startRow, pageSize, totalFilter, totalRowsWithoutFilter) {
               final localizations = MaterialLocalizations.of(context);
@@ -135,12 +97,11 @@ class _DynamicTableState extends State<DynamicTable> {
 
               if (totalFilter != null) {
                 //Filtered data source show addtional information
-                amountText += ' filtered from ($totalFilter)';
+                amountText += ' filtered from ($totalRowsWithoutFilter)';
               }
 
               return amountText;
             },
-            rowsPerPage: 4,
           ),
         ],
       ),
@@ -184,10 +145,14 @@ class DynamicDataTableSource extends AdvancedDataTableSource<dynamic> {
   Future<RemoteDataSourceDetails<dynamic>> getNextPage(
     NextPageRequest pageRequest,
   ) async {
-    var response = await Api().dio.get(uri);
+    final queryParameter = <String, dynamic>{
+      'page': (pageRequest.offset / pageRequest.pageSize + 1).toInt(),
+      'pageSize': pageRequest.pageSize.toString(),
+    };
+    var response = await Api().dio.get(uri, queryParameters: queryParameter);
     if (response.statusCode == 200) {
-      List<dynamic> rows = response.data as List;
-      return RemoteDataSourceDetails(4, rows,
+      List<dynamic> rows = response.data['data'] as List;
+      return RemoteDataSourceDetails(response.data['total'], rows,
           filteredRows: lastSearchTerm.isNotEmpty ? rows.length : null);
     } else {
       throw Exception('Unable to query remote server');

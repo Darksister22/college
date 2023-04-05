@@ -96,7 +96,7 @@ class _LoginState extends State<Login> {
                                         password.text, showSnackbar);
                                   } catch (e) {
                                     context.showSnackBar(
-                                        "حدث خطأ ما, يرجى اعادة المحاولة لاحقاً",
+                                        ".حدث خطأ ما, يرجى اعادة المحاولة لاحقاً",
                                         isError: true);
                                   }
                                 }
@@ -104,6 +104,8 @@ class _LoginState extends State<Login> {
                               sizedBox(width: 38.0),
                               hotElevatedButton(() {
                                 Navigator.pushNamed(context, "/home");
+                                context.showSnackBar(
+                                    "تم تسجيل الدخول كضيف - سيمكنك قراءة البيانات فقط.");
                               }, "الدخول كضيف"),
                             ],
                           ),
