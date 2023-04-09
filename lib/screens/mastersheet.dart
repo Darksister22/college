@@ -8,9 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MasterSheetTable extends StatefulWidget {
-  final dynamic year;
-
-  const MasterSheetTable({super.key, required this.year});
+  const MasterSheetTable({super.key});
 
   @override
   State<MasterSheetTable> createState() => _MasterSheetTableState();
@@ -19,7 +17,6 @@ class MasterSheetTable extends StatefulWidget {
 class _MasterSheetTableState extends State<MasterSheetTable> {
   @override
   Widget build(BuildContext context) {
-    String yearnum = widget.year.toString();
     return Dashboard(
       selectedRoute: '/levelmenu',
       title: "الماستر شيت للسنة الدراسية 2022-2023",
@@ -53,7 +50,7 @@ class _MasterSheetTableState extends State<MasterSheetTable> {
                           : translateStsEA(currentRowData['sts'])),
                     ];
                   },
-                  uri: "students/$yearnum"),
+                  uri: "degrees"),
               columns: [
                 dataColumn("اسم الطالب", context),
                 dataColumn("اسم المادة", context),

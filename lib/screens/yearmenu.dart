@@ -42,8 +42,9 @@ class _YearMenuState extends State<YearMenu> {
                       width / 1.4,
                       height / 5,
                       const FaIcon(FontAwesomeIcons.sheetPlastic),
-                      "الماستر شيت",
-                      () {}),
+                      "الماستر شيت", () {
+                    Navigator.pushNamed(context, "/mastersheet");
+                  }),
                 ],
               ),
               sizedBox(height: 30.0),

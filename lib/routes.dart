@@ -4,6 +4,7 @@ import 'package:college/screens/home.dart';
 import 'package:college/screens/instructortable.dart';
 import 'package:college/screens/levelmenu.dart';
 import 'package:college/screens/login.dart';
+import 'package:college/screens/mastersheet.dart';
 import 'package:college/screens/studentmenu.dart';
 import 'package:college/screens/studenttable.dart';
 import 'package:college/screens/yearmenu.dart';
@@ -32,6 +33,10 @@ class Routes {
       case '/studenttable':
         return MaterialPageRoute(
             builder: (context) => StudentTable(year: args));
+      case "/mastersheet":
+        return MaterialPageRoute(
+          builder: (context) => const MasterSheetTable(),
+        );
       case '/home':
         return MaterialPageRoute(builder: (context) => const Home());
       default:
