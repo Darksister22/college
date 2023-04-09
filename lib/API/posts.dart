@@ -73,7 +73,6 @@ class ApiPosts {
         Navigator.pushNamed(context, "/instructortable");
         showSnackBar("تم تحديث المعلومات بنجاح");
       } else {
-        print(res.statusCode);
         showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
       }
     } catch (e) {
@@ -151,6 +150,15 @@ class ApiPosts {
       return (res.data);
     } catch (e) {
       return "";
+    }
+  }
+
+  Future getHomeData() async {
+    try {
+      var res = await Api().dio.get("homepage");
+      return res;
+    } catch (e) {
+      return 'error';
     }
   }
 }

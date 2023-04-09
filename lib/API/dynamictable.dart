@@ -151,6 +151,7 @@ class DynamicDataTableSource extends AdvancedDataTableSource<dynamic> {
     };
     var response = await Api().dio.get(uri, queryParameters: queryParameter);
     if (response.statusCode == 200) {
+      print(response.data);
       List<dynamic> rows = response.data['data'] as List;
       return RemoteDataSourceDetails(response.data['total'], rows,
           filteredRows: lastSearchTerm.isNotEmpty ? rows.length : null);

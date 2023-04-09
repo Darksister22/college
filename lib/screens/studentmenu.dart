@@ -50,7 +50,8 @@ class _StudentMenuState extends State<StudentMenu> {
                 children: [
                   buttonCard(context, width / 3, height / 7,
                       const FaIcon(FontAwesomeIcons.one), "المرحلة الاولى", () {
-                    Navigator.pushNamed(context, '/studenttable');
+                    Navigator.pushNamed(context, '/studenttable',
+                        arguments: "first");
                   }),
                   buttonCard(
                       context,
@@ -58,7 +59,8 @@ class _StudentMenuState extends State<StudentMenu> {
                       height / 7,
                       const FaIcon(FontAwesomeIcons.two),
                       "المرحلة الثانية", () {
-                    Navigator.pushNamed(context, '/studenttable');
+                    Navigator.pushNamed(context, '/studenttable',
+                        arguments: "second");
                   }),
                 ],
               ),
@@ -72,7 +74,8 @@ class _StudentMenuState extends State<StudentMenu> {
                       height / 7,
                       const FaIcon(FontAwesomeIcons.three),
                       "المرحلة الثالثة", () {
-                    Navigator.pushNamed(context, '/studenttable');
+                    Navigator.pushNamed(context, '/studenttable',
+                        arguments: "third");
                   }),
                   buttonCard(
                       context,
@@ -80,7 +83,8 @@ class _StudentMenuState extends State<StudentMenu> {
                       height / 7,
                       const FaIcon(FontAwesomeIcons.four),
                       "المرحلة الرابعة", () {
-                    Navigator.pushNamed(context, '/studenttable');
+                    Navigator.pushNamed(context, '/studenttable',
+                        arguments: "fourth");
                   }),
                 ],
               ),
@@ -94,7 +98,8 @@ class _StudentMenuState extends State<StudentMenu> {
                       height / 7,
                       const FaIcon(FontAwesomeIcons.book),
                       " الماجستير التحضيري", () {
-                    Navigator.pushNamed(context, '/studenttable');
+                    Navigator.pushNamed(context, '/studenttable',
+                        arguments: "first");
                   }),
                   buttonCard(
                       context,
@@ -102,7 +107,8 @@ class _StudentMenuState extends State<StudentMenu> {
                       height / 7,
                       const FaIcon(FontAwesomeIcons.graduationCap),
                       "الدكتوراة التحضيري", () {
-                    Navigator.pushNamed(context, '/studenttable');
+                    Navigator.pushNamed(context, '/studenttable',
+                        arguments: "first");
                   }),
                 ],
               ),

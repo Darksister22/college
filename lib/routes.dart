@@ -1,3 +1,4 @@
+import 'package:college/screens/coursedegreetable.dart';
 import 'package:college/screens/coursetable.dart';
 import 'package:college/screens/home.dart';
 import 'package:college/screens/instructortable.dart';
@@ -25,10 +26,12 @@ class Routes {
         return MaterialPageRoute(builder: (context) => const CourseTable());
       case '/instructortable':
         return MaterialPageRoute(builder: (context) => const InstructorTable());
+      case '/coursedegreetable':
+        return MaterialPageRoute(
+            builder: (context) => CourseDegreeTable(data: args));
       case '/studenttable':
         return MaterialPageRoute(
-          builder: (context) => const StudentTable(),
-        );
+            builder: (context) => StudentTable(year: args));
       case '/home':
         return MaterialPageRoute(builder: (context) => const Home());
       default:

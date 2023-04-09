@@ -52,17 +52,19 @@ class _EditStudentState extends State<EditStudent> {
                 child: Form(
                   key: formkey,
                   child: Column(children: [
-                    SelectLevels(selYear: selYear),
+                    SelectLevels(selYear: selYear, edit: edit),
                     sizedBox(
                         width: MediaQuery.of(context).size.width * 0.8,
                         height: 20.0),
                     input(context, "اسم الطالب",
                         icon: const FaIcon(FontAwesomeIcons.user),
+                        enabled: edit,
                         controller: nameAr,
                         valiator: validateInput),
                     sizedBox(height: 20.0),
                     input(context, "Student's Name",
                         icon: const FaIcon(FontAwesomeIcons.user),
+                        enabled: edit,
                         controller: nameEn,
                         valiator: validateInput),
                   ]),
@@ -83,7 +85,7 @@ class _EditStudentState extends State<EditStudent> {
                   return Averages(data: widget.data);
                 },
               );
-            }, "عرض معدلات الطالب", FontAwesomeIcons.trashCan),
+            }, "عرض معدلات الطالب", FontAwesomeIcons.calculator),
             iconLabelButton(() {
               setState(() => edit = !edit);
             }, "تعديل المعلومات", FontAwesomeIcons.userPen),

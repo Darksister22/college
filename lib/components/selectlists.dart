@@ -13,7 +13,9 @@ final List<String> _years = ['2023-2022', '2022-2021', '2021-2020'];
 
 class SelectLevels extends StatefulWidget {
   final String selYear;
-  const SelectLevels({Key? key, required this.selYear}) : super(key: key);
+  final bool? edit;
+  const SelectLevels({Key? key, required this.selYear, this.edit})
+      : super(key: key);
 
   @override
   State<SelectLevels> createState() => _SelectLevelsState();
@@ -61,6 +63,7 @@ class _SelectLevelsState extends State<SelectLevels> {
       },
       items: _year.map((year) {
         return DropdownMenuItem(
+          enabled: widget.edit ?? true,
           value: year,
           child: Text(year),
         );
