@@ -31,11 +31,6 @@ class _YearMenuState extends State<YearMenu> {
                   mainSurface(
                       context, "الرجاء الاختيار لعرض الدرجات او المواد"),
                   const Spacer(),
-                  // iconLabelButton(() {
-                  //   showDialog(
-                  //       context: context, builder: (context) => AddStudent());
-                  // }, "طالب جديد", FontAwesomeIcons.plus),
-                  // sizedBox(width: 40.0)
                 ],
               ),
               sizedBox(height: 40.0),

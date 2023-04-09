@@ -25,7 +25,7 @@ class _CourseDegreeTableState extends State<CourseDegreeTable> {
           padding: const EdgeInsets.all(20.0),
           child: DynamicTable(
               add: () {},
-              label: "اضافة كورس جديد",
+              label: "عرض سعيات المادة",
               source: DynamicDataTableSource(
                   cells: (currentRowData) {
                     if (currentRowData == null) {}
