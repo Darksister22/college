@@ -51,7 +51,7 @@ class _DynamicTableState extends State<DynamicTable> {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: input(context, "البحث",
+                    child: input(context, "البحث...",
                         controller: _searchController,
                         icon: const FaIcon(FontAwesomeIcons.magnifyingGlass)),
                   ),
