@@ -1,13 +1,15 @@
-import 'package:college/screens/coursedegreetable.dart';
-import 'package:college/screens/coursetable.dart';
+import 'package:college/screens/menus/settingsmenu.dart';
+import 'package:college/screens/tables/coursedegreetable.dart';
+import 'package:college/screens/tables/coursetable.dart';
 import 'package:college/screens/home.dart';
-import 'package:college/screens/instructortable.dart';
-import 'package:college/screens/levelmenu.dart';
+import 'package:college/screens/tables/instructortable.dart';
+import 'package:college/screens/menus/levelmenu.dart';
 import 'package:college/screens/login.dart';
-import 'package:college/screens/mastersheet.dart';
-import 'package:college/screens/studentmenu.dart';
-import 'package:college/screens/studenttable.dart';
-import 'package:college/screens/yearmenu.dart';
+import 'package:college/screens/menus/mastersheet.dart';
+import 'package:college/screens/menus/studentmenu.dart';
+import 'package:college/screens/tables/studenttable.dart';
+import 'package:college/screens/menus/yearmenu.dart';
+import 'package:college/screens/tables/userstable.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -35,7 +37,12 @@ class Routes {
             builder: (context) => StudentTable(year: args));
       case "/mastersheet":
         return MaterialPageRoute(
-          builder: (context) => const MasterSheetTable(),
+            builder: (context) => const MasterSheetTable());
+      case "/settingsmenu":
+        return MaterialPageRoute(builder: (context) => const SettingsMenu());
+      case "/usertable":
+        return MaterialPageRoute(
+          builder: (context) => const UserTable(),
         );
       case '/home':
         return MaterialPageRoute(builder: (context) => const Home());

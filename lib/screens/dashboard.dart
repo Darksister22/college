@@ -40,7 +40,10 @@ class _DashboardState extends State<Dashboard> {
           title: Text(title),
           actions: [
             IconButton(
-                onPressed: () {}, icon: const FaIcon(FontAwesomeIcons.gear)),
+                onPressed: () {
+                  Navigator.pushNamed(context, "/settingsmenu");
+                },
+                icon: const FaIcon(FontAwesomeIcons.gear)),
             sizedBox(width: 5.0),
             IconButton(
                 onPressed: () async {

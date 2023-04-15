@@ -58,10 +58,6 @@ String translateYearAE(String year) {
 
 String translateRoleAE(String role) {
   switch (role) {
-    case 'زائر - قراءة فقط':
-      {
-        return 'guest';
-      }
     case 'عضو - قراءة و تعديل':
       {
         return 'admin';
@@ -79,10 +75,6 @@ String translateRoleAE(String role) {
 
 String translateRoleEA(String role) {
   switch (role) {
-    case 'guest':
-      {
-        return 'زائر - قراءة فقط';
-      }
     case 'admin':
       {
         return 'عضو - قراءة و تعديل';

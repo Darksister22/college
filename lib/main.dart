@@ -3,7 +3,7 @@
 import 'package:college/routes.dart';
 import 'package:college/screens/home.dart';
 import 'package:college/screens/login.dart';
-import 'package:college/screens/studentmenu.dart';
+import 'package:college/screens/menus/studentmenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';

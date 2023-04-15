@@ -161,4 +161,29 @@ class ApiPosts {
       return 'error';
     }
   }
+
+  Future createUser(context, String name, String email, String selRole,
+      String password, Function showSnackBar) async {
+    var data = {
+      "email": email,
+      "password": password,
+      "role": translateRoleAE(selRole),
+      'name': name
+    };
+    try {
+      final res = await Api().dio.post('users/create/', data: data);
+      if (res.statusCode == 200) {
+        showSnackBar("تم اضافة المستخدم بنجاح");
+        Navigator.pushNamed(context, "/usertable");
+      } else if (res.statusCode == 409) {
+        showSnackBar('البريد الالكتروني مأخوذ سابقاً', isError: true);
+      } else if (res.statusCode == 403) {
+        showSnackBar('لا تملك الصلاحية', isError: true);
+      } else {
+        showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+      }
+    } catch (e) {
+      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+    }
+  }
 }

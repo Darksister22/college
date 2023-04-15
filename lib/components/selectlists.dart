@@ -8,7 +8,10 @@ final List<String> _year = [
   'الماجستير',
   'الدكتوراة'
 ];
-
+final List<String> _role = [
+  'عضو - قراءة و تعديل',
+  'رئيس - جميع الصلاحيات',
+];
 final List<String> _years = ['2023-2022', '2022-2021', '2021-2020'];
 
 class SelectLevels extends StatefulWidget {
@@ -103,6 +106,43 @@ class _SelectYearsState extends State<SelectYears> {
         return DropdownMenuItem(
           value: years,
           child: Text(years),
+        );
+      }).toList(),
+    );
+  }
+}
+
+class SelectRole extends StatefulWidget {
+  const SelectRole({super.key, required this.selRole});
+  final String selRole;
+
+  @override
+  State<SelectRole> createState() => _SelectRoleState();
+}
+
+class _SelectRoleState extends State<SelectRole> {
+  late String selRole;
+  @override
+  void initState() {
+    super.initState();
+    selRole = widget.selRole;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField(
+      isExpanded: true,
+      hint: const Text('الصلاحيات'),
+      value: selRole,
+      onChanged: (newValue) {
+        setState(() {
+          selRole = newValue.toString();
+        });
+      },
+      items: _role.map((role) {
+        return DropdownMenuItem(
+          value: role,
+          child: Text(role),
         );
       }).toList(),
     );

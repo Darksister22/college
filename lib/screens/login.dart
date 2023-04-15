@@ -15,6 +15,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -89,7 +91,6 @@ class _LoginState extends State<Login> {
                             children: [
                               hotElevatedButton(() async {
                                 if (formKey.currentState!.validate()) {
-                                  //TODO: Add a loading widget.
                                   try {
                                     await ApiPosts().login(context, email.text,
                                         password.text, showSnackbar);

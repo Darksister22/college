@@ -1,5 +1,4 @@
 import 'package:college/API/dynamictable.dart';
-import 'package:college/components/adddialogs/studentdi.dart';
 import 'package:college/components/editdialogs/editstudent.dart';
 import 'package:college/screens/dashboard.dart';
 import 'package:college/components/widgets.dart';
