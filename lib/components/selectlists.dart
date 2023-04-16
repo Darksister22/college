@@ -1,3 +1,5 @@
+import 'package:college/API/queries.dart';
+import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 
 final List<String> _year = [
@@ -190,3 +192,71 @@ class _SelectRoleState extends State<SelectRole> {
     );
   }
 }
+
+// class SelectIns extends StatefulWidget {
+//   const SelectIns({super.key, required this.selRole});
+//   final String selRole;
+
+//   @override
+//   State<SelectIns> createState() => _SelectInsState();
+// }
+
+// class _SelectInsState extends State<SelectIns> {
+//   late String selRole;
+//   @override
+//   void initState() {
+//     super.initState();
+//     selRole = widget.selRole;
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return FutureBuilder(
+//       future: ApiPosts().getInstructors(),
+//       builder: (context, snapshot) {
+//         if (snapshot.hasData) {
+//           return DropdownButtonFormField(
+//             decoration: InputDecoration(
+//               fillColor: Theme.of(context).colorScheme.surface,
+//               filled: true,
+//               labelStyle: const TextStyle(),
+//               enabledBorder: OutlineInputBorder(
+//                   borderRadius: BorderRadius.circular(15),
+//                   borderSide: BorderSide(
+//                       color: Theme.of(context).colorScheme.outline,
+//                       width: 1.0)),
+//               focusedBorder: OutlineInputBorder(
+//                   borderRadius: BorderRadius.circular(15),
+//                   borderSide: BorderSide(
+//                       color: Theme.of(context).colorScheme.secondary,
+//                       width: 1.0)),
+//               errorBorder: OutlineInputBorder(
+//                   borderRadius: BorderRadius.circular(15),
+//                   borderSide: BorderSide(
+//                       color: Theme.of(context).colorScheme.error, width: 1.0)),
+//               focusedErrorBorder: OutlineInputBorder(
+//                   borderRadius: BorderRadius.circular(15),
+//                   borderSide: BorderSide(
+//                       color: Theme.of(context).colorScheme.error, width: 1.0)),
+//             ),
+//             isExpanded: true,
+//             hint: const Text('اختيار التدريسي'),
+//             value: selRole,
+//             onChanged: (snap) {
+//               setState(() {
+//                 selRole = newValue.toString();
+//               });
+//             },
+//             items: _role.map((role) {
+//               return DropdownMenuItem(
+//                 value: role,
+//                 child: Text(role),
+//               );
+//             }).toList(),
+//           );
+//         }
+//         return progressIndicator(context);
+//       },
+//     );
+//   }
+// }

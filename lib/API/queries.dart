@@ -44,6 +44,40 @@ class ApiPosts {
     }
   }
 
+  Future createCourse(
+      context,
+      String nameAr,
+      String nameEn,
+      String year,
+      String success,
+      String code,
+      String ins,
+      String unit,
+      bool isCounts,
+      Function showSnackBar) async {
+    var data = {
+      'name_ar': nameAr,
+      'name_en': nameEn,
+      "level": "bachaelor",
+      "year": translateYearAE(year),
+      "code": code,
+      "unit": unit,
+      "success": success,
+      "isCounts": isCounts,
+      "ins_name": ins,
+    };
+    try {
+      final res = await Api().dio.post('courses/create/', data: data);
+      if (res.statusCode == 200) {
+        showSnackBar("تم اضافة الكورس بنجاح");
+      } else {
+        showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+      }
+    } catch (e) {
+      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+    }
+  }
+
   Future createStudent(String nameAr, String nameEn, String selYear,
       Function showSnackBar) async {
     var data = {
@@ -225,5 +259,10 @@ class ApiPosts {
     } catch (e) {
       showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
     }
+  }
+
+  Future getInstructors() async {
+    var res = await Api().dio.get("instructors/select");
+    return res.data;
   }
 }

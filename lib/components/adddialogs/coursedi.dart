@@ -1,4 +1,4 @@
-import 'package:college/API/posts.dart';
+import 'package:college/API/queries.dart';
 import 'package:college/components/baseadddialog.dart';
 import 'package:college/components/formitems.dart';
 import 'package:college/components/selectlists.dart';
@@ -6,13 +6,26 @@ import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class AddCourse extends StatelessWidget {
+class AddCourse extends StatefulWidget {
   const AddCourse({super.key});
+
+  @override
+  State<AddCourse> createState() => _AddCourseState();
+}
+
+class _AddCourseState extends State<AddCourse> {
   @override
   Widget build(BuildContext context) {
     String selYear = 'السنة الاولى';
-    TextEditingController nameAr = TextEditingController();
-    TextEditingController nameEn = TextEditingController();
+    String selIns = "";
+    final nameAr = TextEditingController();
+
+    final instructor = TextEditingController();
+    final nameEn = TextEditingController();
+    final code = TextEditingController();
+    final success = TextEditingController(text: "50");
+    final unit = TextEditingController();
+    bool isCounts = true;
     void showSnackBar(String message, {bool isError = false}) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -25,7 +38,7 @@ class AddCourse extends StatelessWidget {
     final formkey = GlobalKey<FormState>();
     String? validateInput(String? input) {
       if (input == null || input.isEmpty) {
-        return 'الرجاء ادخال اسم الكورس';
+        return 'الرجاء عدم ترك الحقل فارغاً';
       }
       return null;
     }
@@ -35,8 +48,17 @@ class AddCourse extends StatelessWidget {
         title: "اضافة كورس جديد",
         func: () async {
           if (formkey.currentState!.validate()) {
-            await ApiPosts()
-                .createStudent(nameAr.text, nameEn.text, selYear, showSnackBar);
+            await ApiPosts().createCourse(
+                context,
+                nameAr.text,
+                nameEn.text,
+                selYear,
+                success.text,
+                code.text,
+                selIns,
+                unit.text,
+                isCounts,
+                showSnackBar);
           }
         },
         label: "اضافة",
@@ -45,15 +67,46 @@ class AddCourse extends StatelessWidget {
           SelectLevels(selYear: selYear),
           sizedBox(
               width: MediaQuery.of(context).size.width * 0.8, height: 20.0),
-          input(context, "اسم الطالب",
+          input(context, "اسم الكورس",
               icon: const FaIcon(FontAwesomeIcons.user),
               controller: nameAr,
               valiator: validateInput),
           sizedBox(height: 20.0),
-          input(context, "Student's Name",
+          input(context, "Course Name",
               icon: const FaIcon(FontAwesomeIcons.user),
               controller: nameEn,
               valiator: validateInput),
+          sizedBox(height: 20.0),
+          input(context, "درجة النجاح",
+              icon: const FaIcon(FontAwesomeIcons.user),
+              controller: success,
+              valiator: validateInput),
+          sizedBox(height: 20.0),
+          input(context, "الوحدة",
+              icon: const FaIcon(FontAwesomeIcons.user),
+              controller: unit,
+              valiator: validateInput),
+          sizedBox(height: 20.0),
+          input(context, "كود المادة",
+              icon: const FaIcon(FontAwesomeIcons.user),
+              controller: code,
+              valiator: validateInput),
+          sizedBox(height: 20.0),
+          input(context, "اسم التدريسي",
+              icon: const FaIcon(FontAwesomeIcons.user),
+              controller: instructor,
+              valiator: validateInput),
+          sizedBox(height: 20.0),
+          Row(children: [
+            Checkbox(
+                value: isCounts,
+                onChanged: (value) {
+                  setState(() {
+                    isCounts = value!;
+                  });
+                }),
+            const Text('المادة تشمل عند احتساب المعدل')
+          ])
         ]);
   }
 }

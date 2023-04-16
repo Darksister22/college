@@ -1,4 +1,4 @@
-import 'package:college/API/posts.dart';
+import 'package:college/API/queries.dart';
 import 'package:college/components/formitems.dart';
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';

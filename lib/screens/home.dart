@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:college/API/posts.dart';
+import 'package:college/API/queries.dart';
 import 'package:college/screens/dashboard.dart';
 import 'package:college/components/widgets.dart';
 import 'package:college/translate.dart';
