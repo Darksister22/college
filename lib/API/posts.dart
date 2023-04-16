@@ -80,19 +80,19 @@ class ApiPosts {
     }
   }
 
-  Future destroyInstructor(context, String id, Function showSnackBar) async {
-    try {
-      var res = await Api().dio.post('instructors/destroy/$id');
-      if (res.statusCode == 200) {
-        Navigator.pushNamed(context, "/instructortable");
-        showSnackBar("تم حذف التدريسي بنجاح");
-      } else if (res.statusCode == 409) {
-        showSnackBar("لا يمكن حذف تدريسي لديه مواد حالية", isError: true);
-      }
-    } catch (e) {
-      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
-    }
-  }
+  // Future destroyInstructor(context, String id, Function showSnackBar) async {
+  //   try {
+  //     var res = await Api().dio.post('instructors/destroy/$id');
+  //     if (res.statusCode == 200) {
+  //       Navigator.pushNamed(context, "/instructortable");
+  //       showSnackBar("تم حذف التدريسي بنجاح");
+  //     } else if (res.statusCode == 409) {
+  //       showSnackBar("لا يمكن حذف تدريسي لديه مواد حالية", isError: true);
+  //     }
+  //   } catch (e) {
+  //     showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+  //   }
+  // }
 
   Future editStudent(context, String id, String nameAr, String nameEn,
       String year, Function showSnackBar) async {
@@ -116,19 +116,19 @@ class ApiPosts {
     }
   }
 
-  Future destroyStudent(context, String id, Function showSnackBar) async {
-    try {
-      var res = await Api().dio.post('students/destroy/$id');
-      if (res.statusCode == 200) {
-        Navigator.pushNamed(context, "/studentstable");
-        showSnackBar("تم حذف الطالب بنجاح");
-      } else {
-        showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
-      }
-    } catch (e) {
-      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
-    }
-  }
+  // Future destroyStudent(context, String id, Function showSnackBar) async {
+  //   try {
+  //     var res = await Api().dio.post('students/destroy/$id');
+  //     if (res.statusCode == 200) {
+  //       Navigator.pushNamed(context, "/studentstable");
+  //       showSnackBar("تم حذف الطالب بنجاح");
+  //     } else {
+  //       showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+  //     }
+  //   } catch (e) {
+  //     showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+  //   }
+  // }
 
   Future removeStudent(context, String id, Function showSnackBar) async {
     try {
@@ -179,6 +179,46 @@ class ApiPosts {
         showSnackBar('البريد الالكتروني مأخوذ سابقاً', isError: true);
       } else if (res.statusCode == 403) {
         showSnackBar('لا تملك الصلاحية', isError: true);
+      } else {
+        showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+      }
+    } catch (e) {
+      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+    }
+  }
+
+  Future destroy(context, String id, Function showSnackBar, String type,
+      String nextroute) async {
+    try {
+      var res = await Api().dio.post('$type/destroy/$id');
+      if (res.statusCode == 200) {
+        Navigator.pushNamed(context, nextroute);
+        showSnackBar("تم الحذف بنجاح");
+      } else {
+        showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+      }
+    } catch (e) {
+      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+    }
+  }
+
+  Future editUser(context, String id, String name, String email,
+      String password, String role, Function showSnackBar) async {
+    var data = {
+      "id": id,
+      "name": name,
+      "email": email,
+      "password": password,
+      "role": role
+    };
+    try {
+      var res = await Api().dio.post('users/update', data: data);
+      if (res.statusCode == 200) {
+        Navigator.pushNamed(context, "/usertable");
+        showSnackBar("تم تحديث المعلومات بنجاح");
+      } else if (res.statusCode == 409) {
+        showSnackBar("البريد الالكتروني مكرر. يرجى ادخال بريد جديد.",
+            isError: true);
       } else {
         showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
       }

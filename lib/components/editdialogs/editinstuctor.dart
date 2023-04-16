@@ -79,8 +79,8 @@ class _EditInstructorState extends State<EditInstructor> {
             Visibility(
               visible: edit,
               child: iconLabelButton(() async {
-                await ApiPosts().destroyInstructor(
-                    context, widget.data['id'].toString(), showSnackBar);
+                await ApiPosts().destroy(context, widget.data['id'].toString(),
+                    showSnackBar, "instructors", "/instructortable");
               }, "حذف التدريسي", FontAwesomeIcons.trashCan),
             ),
             Visibility(

@@ -1,6 +1,6 @@
 import 'package:college/API/dynamictable.dart';
 import 'package:college/components/adddialogs/userdi.dart';
-import 'package:college/components/editdialogs/editinstuctor.dart';
+import 'package:college/components/editdialogs/edituser.dart';
 import 'package:college/screens/dashboard.dart';
 import 'package:college/components/widgets.dart';
 import 'package:college/translate.dart';
@@ -40,7 +40,7 @@ class _UserTableState extends State<UserTable> {
                             showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return EditInstructor(data: currentRowData);
+                                  return EditUser(data: currentRowData);
                                 });
                           },
                           icon: const FaIcon(FontAwesomeIcons.pen))),

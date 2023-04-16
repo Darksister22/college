@@ -4,25 +4,28 @@ import 'package:college/components/selectlists.dart';
 import 'package:college/components/widgets.dart';
 import 'package:college/screens/averages.dart';
 import 'package:college/translate.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class EditStudent extends StatefulWidget {
+class EditUser extends StatefulWidget {
   final dynamic data;
-  const EditStudent({super.key, this.data});
+  const EditUser({super.key, this.data});
 
   @override
-  State<EditStudent> createState() => _EditStudentState();
+  State<EditUser> createState() => _EditUserState();
 }
 
-class _EditStudentState extends State<EditStudent> {
+class _EditUserState extends State<EditUser> {
   @override
   Widget build(BuildContext context) {
-    String selYear = translateYearEA(widget.data['year']);
-    TextEditingController nameAr =
-        TextEditingController(text: widget.data['name_ar']);
-    TextEditingController nameEn =
-        TextEditingController(text: widget.data['name_en']);
+    String selRole = translateYearEA(widget.data['role']);
+    TextEditingController name =
+        TextEditingController(text: widget.data['name']);
+    TextEditingController email =
+        TextEditingController(text: widget.data['email']);
+    TextEditingController password =
+        TextEditingController(text: widget.data['password']);
     bool edit = false;
     void showSnackBar(String message, {bool isError = false}) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -36,7 +39,7 @@ class _EditStudentState extends State<EditStudent> {
     final formkey = GlobalKey<FormState>();
     String? validateInput(String? input) {
       if (input == null || input.isEmpty) {
-        return 'الرجاء ادخال اسم الطالب';
+        return 'الرجاء عدم ترك الحقل فارغاً. ';
       }
       return null;
     }
@@ -45,28 +48,41 @@ class _EditStudentState extends State<EditStudent> {
       builder: (context, setState) {
         return AlertDialog(
           insetPadding: const EdgeInsets.all(20.0),
-          title: const Text("عرض و تعديل معلومات الطالب"),
+          title: const Text("عرض و تعديل معلومات المستخدم"),
           content: Builder(
             builder: (context) {
               return SingleChildScrollView(
                 child: Form(
                   key: formkey,
                   child: Column(children: [
-                    SelectLevels(selYear: selYear, edit: edit),
                     sizedBox(
                         width: MediaQuery.of(context).size.width * 0.8,
                         height: 20.0),
-                    input(context, "اسم الطالب",
+                    input(context, "اسم المستخدم",
                         icon: const FaIcon(FontAwesomeIcons.user),
                         enabled: edit,
-                        controller: nameAr,
+                        controller: name,
                         valiator: validateInput),
                     sizedBox(height: 20.0),
-                    input(context, "Student's Name",
+                    input(
+                      context,
+                      "البريد الالكتروني",
+                      icon: const FaIcon(FontAwesomeIcons.user),
+                      enabled: edit,
+                      controller: email,
+                      valiator: (value) => EmailValidator.validate(value!)
+                          ? null
+                          : "البريد الالكتروني غير صحيح",
+                    ),
+                    sizedBox(height: 20.0),
+                    input(context, "كلمة السر",
                         icon: const FaIcon(FontAwesomeIcons.user),
                         enabled: edit,
-                        controller: nameEn,
+                        password: true,
+                        controller: password,
                         valiator: validateInput),
+                    sizedBox(height: 20.0),
+                    SelectRole(selRole: selRole)
                   ]),
                 ),
               );
@@ -79,36 +95,14 @@ class _EditStudentState extends State<EditStudent> {
                 },
                 icon: const FaIcon(FontAwesomeIcons.x)),
             iconLabelButton(() {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return Averages(data: widget.data);
-                },
-              );
-            }, "عرض معدلات الطالب", FontAwesomeIcons.calculator),
-            iconLabelButton(() {
               setState(() => edit = !edit);
             }, "تعديل المعلومات", FontAwesomeIcons.userPen),
-            iconLabelButton(
-                () {}, "اضافة الطالب الى مادة", FontAwesomeIcons.userPlus),
-            iconLabelButton(() async {
-              await ApiPosts().removeStudent(
-                  context, widget.data['id'].toString(), showSnackBar);
-            }, "قطع العلاقة", FontAwesomeIcons.userXmark),
             iconLabelButton(() async {
               await ApiPosts().destroy(context, widget.data['id'].toString(),
-                  showSnackBar, "students", "/studenttable");
-            }, "حذف الطالب", FontAwesomeIcons.trashCan),
+                  showSnackBar, "users", "/usertable");
+            }, "حذف المستخدم", FontAwesomeIcons.trashCan),
             iconLabelButton(() async {
-              if (formkey.currentState!.validate()) {
-                await ApiPosts().editStudent(
-                    context,
-                    widget.data['id'].toString(),
-                    nameAr.text,
-                    nameEn.text,
-                    translateYearAE(selYear),
-                    showSnackBar);
-              }
+              if (formkey.currentState!.validate()) {}
             }, "حفظ التغييرات", FontAwesomeIcons.floppyDisk)
           ],
         );
