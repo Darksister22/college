@@ -114,20 +114,6 @@ class ApiPosts {
     }
   }
 
-  // Future destroyInstructor(context, String id, Function showSnackBar) async {
-  //   try {
-  //     var res = await Api().dio.post('instructors/destroy/$id');
-  //     if (res.statusCode == 200) {
-  //       Navigator.pushNamed(context, "/instructortable");
-  //       showSnackBar("تم حذف التدريسي بنجاح");
-  //     } else if (res.statusCode == 409) {
-  //       showSnackBar("لا يمكن حذف تدريسي لديه مواد حالية", isError: true);
-  //     }
-  //   } catch (e) {
-  //     showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
-  //   }
-  // }
-
   Future editStudent(context, String id, String nameAr, String nameEn,
       String year, Function showSnackBar) async {
     var data = {
@@ -149,20 +135,6 @@ class ApiPosts {
       showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
     }
   }
-
-  // Future destroyStudent(context, String id, Function showSnackBar) async {
-  //   try {
-  //     var res = await Api().dio.post('students/destroy/$id');
-  //     if (res.statusCode == 200) {
-  //       Navigator.pushNamed(context, "/studentstable");
-  //       showSnackBar("تم حذف الطالب بنجاح");
-  //     } else {
-  //       showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
-  //     }
-  //   } catch (e) {
-  //     showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
-  //   }
-  // }
 
   Future removeStudent(context, String id, Function showSnackBar) async {
     try {
@@ -201,7 +173,7 @@ class ApiPosts {
     var data = {
       "email": email,
       "password": password,
-      "role": translateRoleAE(selRole),
+      "role": selRole,
       'name': name
     };
     try {

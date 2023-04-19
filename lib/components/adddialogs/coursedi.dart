@@ -1,7 +1,7 @@
 import 'package:college/API/queries.dart';
 import 'package:college/components/baseadddialog.dart';
 import 'package:college/components/formitems.dart';
-import 'package:college/components/selectlists.dart';
+import 'package:college/components/selectlist.dart';
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -64,7 +64,15 @@ class _AddCourseState extends State<AddCourse> {
         label: "اضافة",
         icon: FontAwesomeIcons.plus,
         children: [
-          SelectLevels(selYear: selYear),
+          SelectList(
+              type: 1,
+              selection: selYear,
+              onSelectionChanged: (newValue) {
+                setState(() {
+                  selYear = newValue;
+                });
+              },
+              label: "السنة الدراسية"),
           sizedBox(
               width: MediaQuery.of(context).size.width * 0.8, height: 20.0),
           input(context, "اسم الكورس",
@@ -98,14 +106,23 @@ class _AddCourseState extends State<AddCourse> {
               valiator: validateInput),
           sizedBox(height: 20.0),
           Row(children: [
-            Checkbox(
-                value: isCounts,
-                onChanged: (value) {
-                  setState(() {
-                    isCounts = value!;
-                  });
-                }),
-            const Text('المادة تشمل عند احتساب المعدل')
+            Row(children: [
+              Checkbox(
+                  value: isCounts,
+                  onChanged: (value) {
+                    setState(() {
+                      isCounts = value!;
+                    });
+                  }),
+              Checkbox(
+                  value: isCounts,
+                  onChanged: (value) {
+                    setState(() {
+                      isCounts = value ?? false;
+                    });
+                  }),
+              const Text('المادة تشمل في حساب المعدل'),
+            ])
           ])
         ]);
   }
