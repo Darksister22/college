@@ -27,6 +27,7 @@ class ApiPosts {
         );
       }
     } catch (e) {
+      print(e);
       showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
     }
   }
