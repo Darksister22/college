@@ -1,5 +1,6 @@
 import 'package:college/API/queries.dart';
 import 'package:college/components/formitems.dart';
+import 'package:college/components/selectlist.dart';
 import 'package:college/components/selectlists.dart';
 import 'package:college/components/widgets.dart';
 import 'package:college/screens/averages.dart';
@@ -16,14 +17,21 @@ class EditStudent extends StatefulWidget {
 }
 
 class _EditStudentState extends State<EditStudent> {
+  late String selYear;
+  late TextEditingController nameAr;
+  late TextEditingController nameEn;
+  late bool edit;
+  @override
+  void initState() {
+    selYear = translateYearEA(widget.data['year']);
+    nameAr = TextEditingController(text: widget.data['name_ar']);
+    nameEn = TextEditingController(text: widget.data['name_en']);
+    edit = false;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    String selYear = translateYearEA(widget.data['year']);
-    TextEditingController nameAr =
-        TextEditingController(text: widget.data['name_ar']);
-    TextEditingController nameEn =
-        TextEditingController(text: widget.data['name_en']);
-    bool edit = false;
     void showSnackBar(String message, {bool isError = false}) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -52,7 +60,15 @@ class _EditStudentState extends State<EditStudent> {
                 child: Form(
                   key: formkey,
                   child: Column(children: [
-                    SelectLevels(selYear: selYear, edit: edit),
+                    SelectList(
+                        type: 1,
+                        selection: selYear,
+                        onSelectionChanged: (newValue) {
+                          setState(() {
+                            selYear = newValue;
+                          });
+                        },
+                        label: "السنة الدراسية"),
                     sizedBox(
                         width: MediaQuery.of(context).size.width * 0.8,
                         height: 20.0),

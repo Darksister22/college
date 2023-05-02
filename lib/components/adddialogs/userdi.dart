@@ -1,20 +1,35 @@
 import 'package:college/API/queries.dart';
 import 'package:college/components/baseadddialog.dart';
 import 'package:college/components/formitems.dart';
-import 'package:college/components/selectlists.dart';
+import 'package:college/components/selectlist.dart';
 import 'package:college/components/widgets.dart';
+import 'package:college/translate.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class AddUser extends StatelessWidget {
+class AddUser extends StatefulWidget {
   const AddUser({super.key});
+
+  @override
+  State<AddUser> createState() => _AddUserState();
+}
+
+class _AddUserState extends State<AddUser> {
+  late TextEditingController name;
+  late TextEditingController email;
+  late TextEditingController password;
+  String selRole = 'عضو - قراءة و تعديل';
+  @override
+  void initState() {
+    super.initState();
+    name = TextEditingController();
+    email = TextEditingController();
+    password = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController name = TextEditingController();
-    TextEditingController email = TextEditingController();
-    String selRole = 'عضو - قراءة و تعديل';
-    TextEditingController password = TextEditingController();
     void showSnackBar(String message, {bool isError = false}) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -37,8 +52,8 @@ class AddUser extends StatelessWidget {
         title: "اضافة مستخدم جديد",
         func: () async {
           if (formkey.currentState!.validate()) {
-            await ApiPosts().createUser(context, name.text, email.text, selRole,
-                password.text, showSnackBar);
+            await ApiPosts().createUser(context, name.text, email.text,
+                translateRoleAE(selRole), password.text, showSnackBar);
           }
         },
         label: "اضافة",
@@ -65,7 +80,15 @@ class AddUser extends StatelessWidget {
               valiator: validateInput,
               icon: const FaIcon(FontAwesomeIcons.key)),
           sizedBox(height: 20.0),
-          SelectRole(selRole: selRole)
+          SelectList(
+              type: 2,
+              selection: selRole,
+              onSelectionChanged: (newValue) {
+                setState(() {
+                  selRole = newValue;
+                });
+              },
+              label: "الصلاحيات")
         ]);
   }
 }

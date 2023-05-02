@@ -1,8 +1,7 @@
 import 'package:college/API/queries.dart';
 import 'package:college/components/formitems.dart';
-import 'package:college/components/selectlists.dart';
+import 'package:college/components/selectlist.dart';
 import 'package:college/components/widgets.dart';
-import 'package:college/screens/averages.dart';
 import 'package:college/translate.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -17,16 +16,23 @@ class EditUser extends StatefulWidget {
 }
 
 class _EditUserState extends State<EditUser> {
+  late TextEditingController name;
+  late TextEditingController email;
+  late TextEditingController password;
+  String selRole = 'عضو - قراءة و تعديل';
+  bool edit = false;
+
+  @override
+  void initState() {
+    super.initState();
+    selRole = translateYearEA(widget.data['role']);
+    name = TextEditingController(text: widget.data['name']);
+    email = TextEditingController(text: widget.data['email']);
+    password = TextEditingController(text: widget.data['password']);
+  }
+
   @override
   Widget build(BuildContext context) {
-    String selRole = translateYearEA(widget.data['role']);
-    TextEditingController name =
-        TextEditingController(text: widget.data['name']);
-    TextEditingController email =
-        TextEditingController(text: widget.data['email']);
-    TextEditingController password =
-        TextEditingController(text: widget.data['password']);
-    bool edit = false;
     void showSnackBar(String message, {bool isError = false}) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -82,7 +88,15 @@ class _EditUserState extends State<EditUser> {
                         controller: password,
                         valiator: validateInput),
                     sizedBox(height: 20.0),
-                    SelectRole(selRole: selRole)
+                    SelectList(
+                        type: 2,
+                        selection: selRole,
+                        onSelectionChanged: (newValue) {
+                          setState(() {
+                            selRole = newValue;
+                          });
+                        },
+                        label: "الصلاحيات")
                   ]),
                 ),
               );
