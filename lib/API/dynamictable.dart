@@ -51,9 +51,26 @@ class _DynamicTableState extends State<DynamicTable> {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: input(context, "البحث...",
-                        controller: _searchController,
-                        icon: const FaIcon(FontAwesomeIcons.magnifyingGlass)),
+                    child: inputSearch(
+                      context,
+                      "البحث...",
+                      controller: _searchController,
+                      search: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _source.filterServerSide(_searchController.text);
+                            });
+                          },
+                          icon: const FaIcon(FontAwesomeIcons.magnifyingGlass)),
+                      clear: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _source.filterServerSide("");
+                              _searchController.text = "";
+                            });
+                          },
+                          icon: const FaIcon(FontAwesomeIcons.x)),
+                    ),
                   ),
                 ),
                 iconLabelButton(widget.add, widget.label, FontAwesomeIcons.plus)
@@ -85,23 +102,6 @@ class _DynamicTableState extends State<DynamicTable> {
             errorWidget: () => errorIndicator(
                 context, "حدث خطأ في التحميل, يرجى اعادة المحاولة"),
             //Optianl override to support custom data row text / translation
-            getFooterRowText:
-                (startRow, pageSize, totalFilter, totalRowsWithoutFilter) {
-              final localizations = MaterialLocalizations.of(context);
-              var amountText = localizations.pageRowsInfoTitle(
-                startRow,
-                pageSize,
-                totalFilter ?? totalRowsWithoutFilter,
-                false,
-              );
-
-              if (totalFilter != null) {
-                //Filtered data source show addtional information
-                amountText += ' filtered from ($totalRowsWithoutFilter)';
-              }
-
-              return amountText;
-            },
           ),
         ],
       ),
@@ -117,6 +117,7 @@ class DynamicDataTableSource extends AdvancedDataTableSource<dynamic> {
 
   List<String> selectedIds = [];
   String lastSearchTerm = '';
+  int? filteredRows; // store the number of rows that match the search term
 
   @override
   DataRow? getRow(int index) {
@@ -138,6 +139,7 @@ class DynamicDataTableSource extends AdvancedDataTableSource<dynamic> {
 
   void filterServerSide(String filterQuery) {
     lastSearchTerm = filterQuery.toLowerCase().trim();
+    filteredRows = null; // reset filteredRows to null
     setNextView();
   }
 
@@ -148,12 +150,19 @@ class DynamicDataTableSource extends AdvancedDataTableSource<dynamic> {
     final queryParameter = <String, dynamic>{
       'page': (pageRequest.offset / pageRequest.pageSize + 1).toInt(),
       'pageSize': pageRequest.pageSize.toString(),
+      if (lastSearchTerm.isNotEmpty)
+        'search': lastSearchTerm, // send search term as query parameter
     };
     var response = await Api().dio.get(uri, queryParameters: queryParameter);
     if (response.statusCode == 200) {
       List<dynamic> rows = response.data['data'] as List;
-      return RemoteDataSourceDetails(response.data['total'], rows,
-          filteredRows: lastSearchTerm.isNotEmpty ? rows.length : null);
+      return RemoteDataSourceDetails(
+        response.data['total'],
+        rows,
+        filteredRows: lastSearchTerm.isNotEmpty
+            ? filteredRows ?? rows.length
+            : null, // update filteredRows accordingly
+      );
     } else {
       throw Exception('Unable to query remote server');
     }
