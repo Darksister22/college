@@ -42,7 +42,9 @@ class _LevelMenuState extends State<LevelMenu> {
                       const FaIcon(FontAwesomeIcons.one), "المرحلة الاولى", () {
                     showDialog(
                         context: context,
-                        builder: (context) => const SelectYear());
+                        builder: (context) => const SelectYear(
+                              level: "first",
+                            ));
                   }),
                   buttonCard(
                       context,
@@ -52,7 +54,9 @@ class _LevelMenuState extends State<LevelMenu> {
                       "المرحلة الثانية", () {
                     showDialog(
                         context: context,
-                        builder: (context) => const SelectYear());
+                        builder: (context) => const SelectYear(
+                              level: "second",
+                            ));
                   }),
                 ],
               ),
@@ -68,7 +72,9 @@ class _LevelMenuState extends State<LevelMenu> {
                       "المرحلة الثالثة", () {
                     showDialog(
                         context: context,
-                        builder: (context) => const SelectYear());
+                        builder: (context) => const SelectYear(
+                              level: "third",
+                            ));
                   }),
                   buttonCard(
                       context,
@@ -78,7 +84,9 @@ class _LevelMenuState extends State<LevelMenu> {
                       "المرحلة الرابعة", () {
                     showDialog(
                         context: context,
-                        builder: (context) => const SelectYear());
+                        builder: (context) => const SelectYear(
+                              level: "fourth",
+                            ));
                   }),
                 ],
               ),
@@ -94,7 +102,9 @@ class _LevelMenuState extends State<LevelMenu> {
                       " الماجستير التحضيري", () {
                     showDialog(
                         context: context,
-                        builder: (context) => const SelectYear());
+                        builder: (context) => const SelectYear(
+                              level: "first",
+                            ));
                   }),
                   buttonCard(
                       context,
@@ -104,7 +114,9 @@ class _LevelMenuState extends State<LevelMenu> {
                       "الدكتوراة التحضيري", () {
                     showDialog(
                         context: context,
-                        builder: (context) => const SelectYear());
+                        builder: (context) => const SelectYear(
+                              level: "first",
+                            ));
                   }),
                 ],
               ),

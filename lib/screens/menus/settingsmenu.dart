@@ -50,7 +50,9 @@ class _SettingsMenuState extends State<SettingsMenu> {
                       "تعديل الكورس الدراسي", () {
                     showDialog(
                         context: context,
-                        builder: (context) => const SelectYear());
+                        builder: (context) => const SelectYear(
+                              level: "first",
+                            ));
                   }),
                 ],
               ),

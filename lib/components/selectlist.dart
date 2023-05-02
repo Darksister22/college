@@ -59,7 +59,7 @@ class _SelectListState extends State<SelectList> {
   @override
   Widget build(BuildContext context) {
     return AbsorbPointer(
-      absorbing: widget.edit ?? true,
+      absorbing: widget.edit == true,
       child: DropdownButtonFormField(
         decoration: InputDecoration(
           fillColor: Theme.of(context).colorScheme.surface,
@@ -87,7 +87,6 @@ class _SelectListState extends State<SelectList> {
         value: selection,
         onChanged: (newValue) {
           setState(() {
-            debugPrint(newValue);
             selection = newValue.toString();
             widget.onSelectionChanged(selection);
           });

@@ -1,7 +1,6 @@
 import 'package:college/API/queries.dart';
 import 'package:college/components/formitems.dart';
 import 'package:college/components/selectlist.dart';
-import 'package:college/components/selectlists.dart';
 import 'package:college/components/widgets.dart';
 import 'package:college/screens/averages.dart';
 import 'package:college/translate.dart';

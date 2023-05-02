@@ -55,7 +55,6 @@ class _SelectListState extends State<SelectList> {
         hint: Text(widget.label),
         onChanged: (newValue) {
           setState(() {
-            debugPrint(newValue);
             selection = newValue.toString();
             widget.onSelectionChanged(selection!);
           });

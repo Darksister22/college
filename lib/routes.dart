@@ -24,9 +24,12 @@ class Routes {
       case '/levelmenu':
         return MaterialPageRoute(builder: (context) => const LevelMenu());
       case '/yearmenu':
-        return MaterialPageRoute(builder: (context) => const YearMenu());
-      case '/coursetable':
-        return MaterialPageRoute(builder: (context) => const CourseTable());
+        return MaterialPageRoute(
+            builder: (context) => YearMenu(
+                  level: args,
+                ));
+      // case '/coursetable':
+      //   return MaterialPageRoute(builder: (context) =>  CourseTable(level: args['select'],));
       case '/instructortable':
         return MaterialPageRoute(builder: (context) => const InstructorTable());
       case '/coursedegreetable':

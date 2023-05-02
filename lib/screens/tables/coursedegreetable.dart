@@ -3,6 +3,7 @@ import 'package:college/screens/dashboard.dart';
 import 'package:college/components/widgets.dart';
 import 'package:college/translate.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CourseDegreeTable extends StatefulWidget {
   final dynamic data;
@@ -27,27 +28,46 @@ class _CourseDegreeTableState extends State<CourseDegreeTable> {
               label: "عرض سعيات المادة",
               source: DynamicDataTableSource(
                   cells: (currentRowData) {
-                    if (currentRowData == null) {}
                     return [
+                      DataCell(IconButton(
+                        icon: const FaIcon(FontAwesomeIcons.eye),
+                        onPressed: () {},
+                      )),
+                      dataCell(currentRowData['student']["name_ar"].toString()),
+                      dataCell(check(currentRowData['fourty'].toString())),
+                      dataCell(check(currentRowData['sixty1'].toString())),
+                      dataCell(check(currentRowData['final1'].toString())),
+                      dataCell(check(currentRowData['sixty2'].toString())),
+                      dataCell(check(currentRowData['final2'].toString())),
+                      dataCell(check(currentRowData['sixty3'].toString())),
+                      dataCell(check(currentRowData['final3'].toString())),
                       dataCell(
-                          currentRowData['students'][0]["name_ar"].toString()),
-                      dataCell(
-                          currentRowData['students'][0]["name_ar"].toString()),
-                      dataCell(
-                          currentRowData['students'][0]["name_en"].toString()),
-                      dataCell(translateYearEA(
-                          currentRowData["students"][0]["year"])),
+                          translateStsEA(currentRowData['sts'].toString())),
                     ];
                   },
-                  uri: "courses/students/$id"),
+                  uri: "degrees/get/$id"),
               columns: [
                 dataColumn("عرض المعلومات", context),
                 dataColumn("اسم الطالب", context),
-                dataColumn("Student's Name", context),
-                dataColumn("السنة الدراسية", context),
+                dataColumn("السعي", context),
+                dataColumn("الامتحان د1", context),
+                dataColumn("نهائي د1", context),
+                dataColumn("الامتحان د2", context),
+                dataColumn("نهائي د2", context),
+                dataColumn("الامتحان د3", context),
+                dataColumn("نهائي د3", context),
+                dataColumn("الحالة", context),
               ]),
         ),
       ),
     );
+  }
+
+  String check(String col) {
+    if (col == "null") {
+      return "لا يوجد";
+    } else {
+      return col;
+    }
   }
 }

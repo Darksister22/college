@@ -1,11 +1,13 @@
 import 'package:college/screens/dashboard.dart';
 import 'package:college/components/text.dart';
 import 'package:college/components/widgets.dart';
+import 'package:college/screens/tables/coursetable.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class YearMenu extends StatefulWidget {
-  const YearMenu({super.key});
+  final dynamic level;
+  const YearMenu({super.key, required this.level});
 
   @override
   State<YearMenu> createState() => _YearMenuState();
@@ -57,7 +59,21 @@ class _YearMenuState extends State<YearMenu> {
                       height / 5,
                       const FaIcon(FontAwesomeIcons.book),
                       "مواد الكورس الاول", () {
-                    Navigator.pushNamed(context, '/coursetable');
+                    Map<String, dynamic> args = {
+                      'title': "مواد الكورس الاول",
+                      'level': widget.level,
+                      'semester': "first"
+                    };
+
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CourseTable(
+                            semester: "first",
+                            level: widget.level,
+                            title: "مواد الكورس الاول"),
+                      ),
+                    );
                   }),
                   buttonCard(
                       context,
@@ -65,7 +81,15 @@ class _YearMenuState extends State<YearMenu> {
                       height / 5,
                       const FaIcon(FontAwesomeIcons.book),
                       "مواد الكورس الثاني", () {
-                    Navigator.pushNamed(context, '/coursetable');
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CourseTable(
+                            semester: "second",
+                            level: widget.level,
+                            title: "مواد الكورس الثاني"),
+                      ),
+                    );
                   }),
                 ],
               ),
