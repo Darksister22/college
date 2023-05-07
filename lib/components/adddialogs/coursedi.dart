@@ -14,18 +14,16 @@ class AddCourse extends StatefulWidget {
 }
 
 class _AddCourseState extends State<AddCourse> {
+  String selYear = 'السنة الاولى';
+  String? selIns;
+  final nameAr = TextEditingController();
+  final nameEn = TextEditingController();
+  final code = TextEditingController();
+  final success = TextEditingController(text: "50");
+  final unit = TextEditingController();
+  bool isCounts = true;
   @override
   Widget build(BuildContext context) {
-    String selYear = 'السنة الاولى';
-    String selIns = "";
-    final nameAr = TextEditingController();
-
-    final instructor = TextEditingController();
-    final nameEn = TextEditingController();
-    final code = TextEditingController();
-    final success = TextEditingController(text: "50");
-    final unit = TextEditingController();
-    bool isCounts = true;
     void showSnackBar(String message, {bool isError = false}) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -55,7 +53,7 @@ class _AddCourseState extends State<AddCourse> {
                 selYear,
                 success.text,
                 code.text,
-                selIns,
+                selIns!,
                 unit.text,
                 isCounts,
                 showSnackBar);
@@ -100,29 +98,54 @@ class _AddCourseState extends State<AddCourse> {
               controller: code,
               valiator: validateInput),
           sizedBox(height: 20.0),
-          input(context, "اسم التدريسي",
-              icon: const FaIcon(FontAwesomeIcons.user),
-              controller: instructor,
-              valiator: validateInput),
+          FutureBuilder(
+            future: ApiPosts().getInstructors(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                List<String> dataList = snapshot.data
+                    .map((item) => item['name_ar'].toString())
+                    .toList()
+                    .cast<String>(); // Cast the list to List<String>
+                return StatefulBuilder(
+                  builder: (BuildContext context, setState) {
+                    return DropdownButtonFormField<String>(
+                      isExpanded: true,
+                      validator: (value) {
+                        if (value == null) {
+                          return " الرجاء  اختيار التدريسي ";
+                        }
+                        return null;
+                      },
+                      hint: const Text('اختيار التدريسي'),
+                      value: selIns,
+                      onChanged: (newValue) {
+                        setState(() {
+                          selIns = newValue.toString();
+                        });
+                      },
+                      items: dataList.map((ins) {
+                        return DropdownMenuItem(
+                          value: ins,
+                          child: Text(ins),
+                        );
+                      }).toList(),
+                    );
+                  },
+                );
+              }
+              return progressIndicator(context);
+            },
+          ),
           sizedBox(height: 20.0),
           Row(children: [
-            Row(children: [
-              Checkbox(
-                  value: isCounts,
-                  onChanged: (value) {
-                    setState(() {
-                      isCounts = value!;
-                    });
-                  }),
-              Checkbox(
-                  value: isCounts,
-                  onChanged: (value) {
-                    setState(() {
-                      isCounts = value ?? false;
-                    });
-                  }),
-              const Text('المادة تشمل في حساب المعدل'),
-            ])
+            Checkbox(
+                value: isCounts,
+                onChanged: (value) {
+                  setState(() {
+                    isCounts = value ?? false;
+                  });
+                }),
+            const Text('المادة تشمل في حساب المعدل'),
           ])
         ]);
   }

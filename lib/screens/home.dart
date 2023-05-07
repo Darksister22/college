@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:college/API/queries.dart';
 import 'package:college/screens/dashboard.dart';
 import 'package:college/components/widgets.dart';
@@ -19,7 +18,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
     return Dashboard(
       selectedRoute: '/home',
       title: "نظام اللجنة الامتحانية",

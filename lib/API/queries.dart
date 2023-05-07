@@ -84,7 +84,7 @@ class ApiPosts {
       "name_ar": nameAr,
       "name_en": nameEn,
       "year": translateYearAE(selYear),
-      'level': 'bachaelor' //TODO: Remove level entirely from API.
+      'level': 'bachaelor'
     };
     try {
       final res = await Api().dio.post('students/create/', data: data);
@@ -234,7 +234,11 @@ class ApiPosts {
   }
 
   Future getInstructors() async {
-    var res = await Api().dio.get("instructors/select");
-    return res.data;
+    try {
+      var res = await Api().dio.get("instructors/select");
+      return res.data;
+    } catch (e) {
+      return e;
+    }
   }
 }

@@ -36,12 +36,14 @@ Container primaryContainer(context, width, height, child) {
       child: child);
 }
 
-Text sectionText(context, label) {
-  return Text(label,
-      style: TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: 20,
-          color: Theme.of(context).colorScheme.secondary));
+FittedBox sectionText(context, label) {
+  return FittedBox(
+    child: Text(label,
+        style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 20,
+            color: Theme.of(context).colorScheme.secondary)),
+  );
 }
 
 Container statContainer(context, width, height, stat, title, icon) {
@@ -58,18 +60,20 @@ Container statContainer(context, width, height, stat, title, icon) {
         children: [
           icon,
           sizedBox(width: 30.0),
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(stat,
-                    style: const TextStyle(
-                        fontSize: 50, fontWeight: FontWeight.bold)),
-                Text(
-                  title,
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ]),
+          FittedBox(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(stat,
+                      style: const TextStyle(
+                          fontSize: 50, fontWeight: FontWeight.bold)),
+                  Text(
+                    title,
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ]),
+          ),
         ],
       ),
     ),

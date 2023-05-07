@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-class SelectList extends StatefulWidget {
-  const SelectList(
+class DynamicSelectList extends StatefulWidget {
+  const DynamicSelectList(
       {super.key,
       required this.map,
       required this.onSelectionChanged,
       this.edit,
       required this.label});
-  final List<String> map;
+  final List<dynamic> map;
   final bool? edit;
   final String label;
   final ValueChanged<String> onSelectionChanged;
 
   @override
-  State<SelectList> createState() => _SelectListState();
+  State<DynamicSelectList> createState() => _DynamicSelectListState();
 }
 
-class _SelectListState extends State<SelectList> {
-  late String? selection;
+class _DynamicSelectListState extends State<DynamicSelectList> {
+  late String? selection = "785";
   late int type;
   @override
   void initState() {

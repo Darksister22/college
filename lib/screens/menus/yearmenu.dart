@@ -59,12 +59,6 @@ class _YearMenuState extends State<YearMenu> {
                       height / 5,
                       const FaIcon(FontAwesomeIcons.book),
                       "مواد الكورس الاول", () {
-                    Map<String, dynamic> args = {
-                      'title': "مواد الكورس الاول",
-                      'level': widget.level,
-                      'semester': "first"
-                    };
-
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
