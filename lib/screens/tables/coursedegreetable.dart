@@ -1,4 +1,5 @@
 import 'package:college/API/dynamictable.dart';
+import 'package:college/API/queries.dart';
 import 'package:college/screens/dashboard.dart';
 import 'package:college/components/widgets.dart';
 import 'package:college/translate.dart';
@@ -24,7 +25,9 @@ class _CourseDegreeTableState extends State<CourseDegreeTable> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: DynamicTable(
-              add: () {},
+              add: () async {
+                ApiPosts().callPrintFourty('path', id);
+              },
               label: "عرض سعيات المادة",
               source: DynamicDataTableSource(
                   cells: (currentRowData) {
