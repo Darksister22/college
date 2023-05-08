@@ -45,6 +45,19 @@ class ApiPosts {
     }
   }
 
+  Future createDegree(context, String id, String fourty, String sixty1,
+      String sixty2, String sixty3, Function showSnackBar) async {
+    var data = {'id': id, "sixty1": sixty1, "sixty2": sixty2, "sixty3": sixty3};
+    try {
+      final res = await Api().dio.post('degrees/create', data: data);
+      if (res.statusCode == 200) {
+        showSnackBar("تم اضافة الدرجات بنجاح");
+      }
+    } catch (e) {
+      showSnackBar("حدث خطأ ما, يرجى اعادة المحاولة", isError: true);
+    }
+  }
+
   Future createCourse(
       context,
       String nameAr,
