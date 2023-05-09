@@ -27,6 +27,7 @@ class Routes {
         return MaterialPageRoute(
             builder: (context) => YearMenu(
                   level: args,
+                  year: args,
                 ));
       // case '/coursetable':
       //   return MaterialPageRoute(builder: (context) =>  CourseTable(level: args['select'],));

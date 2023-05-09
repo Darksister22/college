@@ -77,7 +77,7 @@ class ApiPosts {
       "year": translateYearAE(year),
       "code": code,
       "unit": unit,
-      "semester": semester,
+      "semester": translateNumAE(semester),
       "success": success,
       "isCounts": isCounts,
       "ins_name": ins,
@@ -252,6 +252,15 @@ class ApiPosts {
   Future getInstructors() async {
     try {
       var res = await Api().dio.get("instructors/select");
+      return res.data;
+    } catch (e) {
+      return e;
+    }
+  }
+
+  Future getYears() async {
+    try {
+      var res = await Api().dio.get("semesters/get");
       return res.data;
     } catch (e) {
       return e;
