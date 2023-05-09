@@ -7,7 +7,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class YearMenu extends StatefulWidget {
   final dynamic level;
-  const YearMenu({super.key, required this.level});
+  final dynamic year;
+  const YearMenu({super.key, required this.level, required this.year});
 
   @override
   State<YearMenu> createState() => _YearMenuState();
@@ -20,7 +21,7 @@ class _YearMenuState extends State<YearMenu> {
     double height = MediaQuery.of(context).size.height;
     return Dashboard(
       selectedRoute: '/levelmenu',
-      title: "السنة الدراسية 2022 - 2023",
+      title: " السنة الدراسية" + widget.year,
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -64,6 +65,7 @@ class _YearMenuState extends State<YearMenu> {
                       MaterialPageRoute(
                         builder: (context) => CourseTable(
                             semester: "first",
+                            year: widget.year,
                             level: widget.level,
                             title: "مواد الكورس الاول"),
                       ),
@@ -80,6 +82,7 @@ class _YearMenuState extends State<YearMenu> {
                       MaterialPageRoute(
                         builder: (context) => CourseTable(
                             semester: "second",
+                            year: widget.year,
                             level: widget.level,
                             title: "مواد الكورس الثاني"),
                       ),

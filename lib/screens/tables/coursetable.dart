@@ -9,12 +9,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class CourseTable extends StatefulWidget {
   final dynamic title;
   final dynamic level;
+  final dynamic year;
   final dynamic semester;
   const CourseTable(
       {super.key,
       required this.title,
       required this.level,
-      required this.semester});
+      required this.semester,
+      required this.year});
 
   @override
   State<CourseTable> createState() => _CourseTableState();
@@ -25,6 +27,7 @@ class _CourseTableState extends State<CourseTable> {
   Widget build(BuildContext context) {
     String level = widget.level;
     String semester = widget.semester;
+    String year = widget.year;
     return Dashboard(
       selectedRoute: '/levelmenu',
       title: widget.title.toString(),
@@ -57,7 +60,7 @@ class _CourseTableState extends State<CourseTable> {
                       dataCell(currentRowData['code'])
                     ];
                   },
-                  uri: "courses/$level/$semester"),
+                  uri: "courses/$level/$semester/$year"),
               columns: [
                 dataColumn("عرض المعلومات", context),
                 dataColumn("اسم المادة", context),
