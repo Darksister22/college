@@ -16,9 +16,11 @@ class AddCourse extends StatefulWidget {
 class _AddCourseState extends State<AddCourse> {
   String selYear = 'السنة الاولى';
   String? selIns;
+  String selNum = 'الكورس الاول';
   final nameAr = TextEditingController();
   final nameEn = TextEditingController();
   final code = TextEditingController();
+  final semester = TextEditingController();
   final success = TextEditingController(text: "50");
   final unit = TextEditingController();
   bool isCounts = true;
@@ -54,6 +56,7 @@ class _AddCourseState extends State<AddCourse> {
                 success.text,
                 code.text,
                 selIns!,
+                semester.text,
                 unit.text,
                 isCounts,
                 showSnackBar);
@@ -71,6 +74,15 @@ class _AddCourseState extends State<AddCourse> {
                 });
               },
               label: "السنة الدراسية"),
+          SelectList(
+              type: 4,
+              selection: selNum,
+              onSelectionChanged: (newValue) {
+                setState(() {
+                  selNum = newValue;
+                });
+              },
+              label: "الفصل الدراسي"),
           sizedBox(
               width: MediaQuery.of(context).size.width * 0.8, height: 20.0),
           input(context, "اسم الكورس",

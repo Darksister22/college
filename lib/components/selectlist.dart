@@ -52,6 +52,10 @@ class _SelectListState extends State<SelectList> {
           ['2023-2022', '2022-2021', '2021-2020'];
           break;
         }
+      case 4:
+        {
+          ['الكورس الاول', 'الكورس الثاني'];
+        }
     }
     super.initState();
   }

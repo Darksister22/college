@@ -66,6 +66,7 @@ class ApiPosts {
       String success,
       String code,
       String ins,
+      String semester,
       String unit,
       bool isCounts,
       Function showSnackBar) async {
@@ -76,6 +77,7 @@ class ApiPosts {
       "year": translateYearAE(year),
       "code": code,
       "unit": unit,
+      "semester": semester,
       "success": success,
       "isCounts": isCounts,
       "ins_name": ins,
