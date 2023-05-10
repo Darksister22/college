@@ -3,6 +3,7 @@ import 'package:college/components/formitems.dart';
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditInstructor extends StatefulWidget {
   final dynamic data;
@@ -13,13 +14,29 @@ class EditInstructor extends StatefulWidget {
 }
 
 class _EditInstructorState extends State<EditInstructor> {
+  late TextEditingController nameAr;
+  late bool edit;
+
+  late TextEditingController nameEn;
+  late bool logged = false;
+  void _loadSharedPreferences() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    setState(() {
+      logged = localStorage.getString("token") == null;
+    });
+  }
+
+  @override
+  void initState() {
+    nameAr = TextEditingController(text: widget.data['name_ar']);
+    nameEn = TextEditingController(text: widget.data['name_en']);
+    edit = false;
+    _loadSharedPreferences();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController nameAr =
-        TextEditingController(text: widget.data['name_ar']);
-    TextEditingController nameEn =
-        TextEditingController(text: widget.data['name_en']);
-    bool edit = false;
     void showSnackBar(String message, {bool isError = false}) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -73,11 +90,14 @@ class _EditInstructorState extends State<EditInstructor> {
                   Navigator.pop(context);
                 },
                 icon: const FaIcon(FontAwesomeIcons.x)),
-            iconLabelButton(() {
-              setState(() => edit = !edit);
-            }, "تعديل المعلومات", FontAwesomeIcons.userPen),
             Visibility(
-              visible: edit,
+              visible: !logged,
+              child: iconLabelButton(() {
+                setState(() => edit = !edit);
+              }, "تعديل المعلومات", FontAwesomeIcons.userPen),
+            ),
+            Visibility(
+              visible: edit && !logged,
               child: iconLabelButton(() async {
                 await ApiPosts().destroy(context, widget.data['id'].toString(),
                     showSnackBar, "instructors", "/instructortable");

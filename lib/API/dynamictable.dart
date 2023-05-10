@@ -5,6 +5,7 @@ import 'package:college/components/formitems.dart';
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 typedef CellsCallback = List<DataCell> Function(dynamic currentRowData);
 
@@ -29,10 +30,19 @@ class _DynamicTableState extends State<DynamicTable> {
   var _sortIndex = 0;
   var _sortAsc = true; //determine how to sort.
   final _searchController = TextEditingController(); //used for search
+  bool logged = false;
+  void _loadSharedPreferences() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    setState(() {
+      logged = localStorage.getString("token") == null;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _source = widget.source;
+    _loadSharedPreferences();
   }
 
   void setSort(int i, bool asc) => setState(() {
@@ -73,7 +83,10 @@ class _DynamicTableState extends State<DynamicTable> {
                     ),
                   ),
                 ),
-                iconLabelButton(widget.add, widget.label, FontAwesomeIcons.plus)
+                Visibility(
+                    visible: !logged,
+                    child: iconLabelButton(
+                        widget.add, widget.label, FontAwesomeIcons.plus))
               ],
             ),
           ),

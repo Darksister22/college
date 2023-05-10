@@ -24,12 +24,22 @@ class _DashboardState extends State<Dashboard> {
   late String title;
   late Widget child;
   late var selectedRoute;
+  late bool logged = false;
+  void _loadSharedPreferences() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    setState(() {
+      logged = localStorage.getString("token") == null &&
+          localStorage.getString("role") != "superadmin";
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     title = widget.title;
     child = widget.child;
     selectedRoute = widget.selectedRoute;
+    _loadSharedPreferences();
   }
 
   @override
@@ -39,18 +49,23 @@ class _DashboardState extends State<Dashboard> {
         appBar: AppBar(
           title: Text(title),
           actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, "/settingsmenu");
-                },
-                icon: const FaIcon(FontAwesomeIcons.gear)),
+            Visibility(
+              visible: !logged,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/settingsmenu");
+                  },
+                  icon: const FaIcon(FontAwesomeIcons.gear)),
+            ),
             sizedBox(width: 5.0),
             IconButton(
                 onPressed: () async {
-                  SharedPreferences preferences =
-                      await SharedPreferences.getInstance();
-                  await preferences.clear();
-                  Navigator.pushNamed(context, '/');
+                  try {
+                    SharedPreferences preferences =
+                        await SharedPreferences.getInstance();
+                    await preferences.clear();
+                    Navigator.pushNamed(context, '/');
+                  } catch (e) {}
                 },
                 icon: const FaIcon(FontAwesomeIcons.doorOpen)),
           ],

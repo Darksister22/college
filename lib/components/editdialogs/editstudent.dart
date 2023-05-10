@@ -6,6 +6,7 @@ import 'package:college/screens/averages.dart';
 import 'package:college/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditStudent extends StatefulWidget {
   final dynamic data;
@@ -20,12 +21,21 @@ class _EditStudentState extends State<EditStudent> {
   late TextEditingController nameAr;
   late TextEditingController nameEn;
   late bool edit;
+  late bool logged = false;
+  void _loadSharedPreferences() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    setState(() {
+      logged = localStorage.getString("token") == null;
+    });
+  }
+
   @override
   void initState() {
     selYear = translateYearEA(widget.data['year']);
     nameAr = TextEditingController(text: widget.data['name_ar']);
     nameEn = TextEditingController(text: widget.data['name_en']);
     edit = false;
+    _loadSharedPreferences();
     super.initState();
   }
 
@@ -104,27 +114,39 @@ class _EditStudentState extends State<EditStudent> {
             iconLabelButton(() {
               setState(() => edit = !edit);
             }, "تعديل المعلومات", FontAwesomeIcons.userPen),
-            iconLabelButton(
-                () {}, "اضافة الطالب الى مادة", FontAwesomeIcons.userPlus),
-            iconLabelButton(() async {
-              await ApiPosts().removeStudent(
-                  context, widget.data['id'].toString(), showSnackBar);
-            }, "قطع العلاقة", FontAwesomeIcons.userXmark),
-            iconLabelButton(() async {
-              await ApiPosts().destroy(context, widget.data['id'].toString(),
-                  showSnackBar, "students", "/studenttable");
-            }, "حذف الطالب", FontAwesomeIcons.trashCan),
-            iconLabelButton(() async {
-              if (formkey.currentState!.validate()) {
-                await ApiPosts().editStudent(
-                    context,
-                    widget.data['id'].toString(),
-                    nameAr.text,
-                    nameEn.text,
-                    translateYearAE(selYear),
-                    showSnackBar);
-              }
-            }, "حفظ التغييرات", FontAwesomeIcons.floppyDisk)
+            Visibility(
+              visible: !logged,
+              child: iconLabelButton(
+                  () {}, "اضافة الطالب الى مادة", FontAwesomeIcons.userPlus),
+            ),
+            Visibility(
+              visible: !logged,
+              child: iconLabelButton(() async {
+                await ApiPosts().removeStudent(
+                    context, widget.data['id'].toString(), showSnackBar);
+              }, "قطع العلاقة", FontAwesomeIcons.userXmark),
+            ),
+            Visibility(
+              visible: !logged,
+              child: iconLabelButton(() async {
+                await ApiPosts().destroy(context, widget.data['id'].toString(),
+                    showSnackBar, "students", "/studenttable");
+              }, "حذف الطالب", FontAwesomeIcons.trashCan),
+            ),
+            Visibility(
+              visible: edit,
+              child: iconLabelButton(() async {
+                if (formkey.currentState!.validate()) {
+                  await ApiPosts().editStudent(
+                      context,
+                      widget.data['id'].toString(),
+                      nameAr.text,
+                      nameEn.text,
+                      translateYearAE(selYear),
+                      showSnackBar);
+                }
+              }, "حفظ التغييرات", FontAwesomeIcons.floppyDisk),
+            )
           ],
         );
       },

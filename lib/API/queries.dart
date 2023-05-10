@@ -47,7 +47,13 @@ class ApiPosts {
 
   Future createDegree(context, String id, String fourty, String sixty1,
       String sixty2, String sixty3, Function showSnackBar) async {
-    var data = {'id': id, "sixty1": sixty1, "sixty2": sixty2, "sixty3": sixty3};
+    var data = {
+      'id': id,
+      'fourty': fourty,
+      "sixty1": sixty1,
+      "sixty2": sixty2,
+      "sixty3": sixty3
+    };
     try {
       final res = await Api().dio.post('degrees/create', data: data);
       if (res.statusCode == 200) {
