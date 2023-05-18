@@ -103,7 +103,8 @@ class _LoginState extends State<Login> {
                               }, "تسجيل الدخول"),
                               sizedBox(width: 38.0),
                               hotElevatedButton(() {
-                                Navigator.pushNamed(context, "/home");
+                                Navigator.pushReplacementNamed(
+                                    context, "/home");
                                 context.showSnackBar(
                                     "تم تسجيل الدخول كضيف - سيمكنك قراءة البيانات فقط.");
                               }, "الدخول كضيف"),

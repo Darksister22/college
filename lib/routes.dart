@@ -1,6 +1,5 @@
 import 'package:college/screens/menus/settingsmenu.dart';
 import 'package:college/screens/tables/coursedegreetable.dart';
-import 'package:college/screens/tables/coursetable.dart';
 import 'package:college/screens/home.dart';
 import 'package:college/screens/tables/instructortable.dart';
 import 'package:college/screens/menus/levelmenu.dart';

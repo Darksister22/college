@@ -275,11 +275,37 @@ class ApiPosts {
 
   Future callPrintFourty(String path, id) async {
     try {
-      Uri _url =
+      Uri url =
           Uri.parse("http://localhost:8001/api/degrees/exfourty?course_id=$id");
-      await launchUrl(_url);
+      await launchUrl(url);
     } catch (e) {
       rethrow;
+    }
+  }
+
+  Future endSemester(showSnackBar) async {
+    var res = await Api().dio.post('semesters/end');
+    if (res.statusCode == 200) {
+      showSnackBar('تمت العملية بنجاح');
+    } else if (res.statusCode == 409) {
+      showSnackBar("لا يوجد فصل دراسي حالي لانهاءه. الرجاء بدء فصل دراسي جديد",
+          isError: true);
+    } else {
+      showSnackBar("حدث خطأ ما, يرجى التأكد من الاتصال بالشبكة.",
+          isError: true);
+    }
+  }
+
+  Future createSemester(String year, showSnackBar) async {
+    var data = {'year': year};
+    var res = await Api().dio.post('semesters/create', data: data);
+    if (res.statusCode == 200) {
+      showSnackBar('تمت العملية بنجاح');
+    } else if (res.statusCode == 410) {
+      showSnackBar("الفصل الدراسي الحالي غير منتهي", isError: true);
+    } else {
+      showSnackBar("حدث خطأ ما, يرجى التأكد من الاتصال بالشبكة.",
+          isError: true);
     }
   }
 }

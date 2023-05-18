@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, use_build_context_synchronously
+
 import 'package:college/components/sidebar.dart';
 import 'package:college/components/widgets.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +55,7 @@ class _DashboardState extends State<Dashboard> {
               visible: !logged,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, "/settingsmenu");
+                    Navigator.pushReplacementNamed(context, "/settingsmenu");
                   },
                   icon: const FaIcon(FontAwesomeIcons.gear)),
             ),
@@ -64,8 +66,10 @@ class _DashboardState extends State<Dashboard> {
                     SharedPreferences preferences =
                         await SharedPreferences.getInstance();
                     await preferences.clear();
-                    Navigator.pushNamed(context, '/');
-                  } catch (e) {}
+                    Navigator.pushReplacementNamed(context, '/');
+                  } catch (e) {
+                    rethrow;
+                  }
                 },
                 icon: const FaIcon(FontAwesomeIcons.doorOpen)),
           ],

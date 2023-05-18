@@ -1,4 +1,4 @@
-import 'package:college/components/adddialogs/yeardi.dart';
+import 'package:college/components/editdialogs/endsemester.dart';
 import 'package:college/screens/dashboard.dart';
 import 'package:college/components/text.dart';
 import 'package:college/components/widgets.dart';
@@ -47,16 +47,33 @@ class _SettingsMenuState extends State<SettingsMenu> {
                       width / 3,
                       height / 7,
                       const FaIcon(FontAwesomeIcons.calendar),
-                      "تعديل الكورس الدراسي", () {
+                      "انهاء الفصل الدراسي", () {
                     showDialog(
                         context: context,
-                        builder: (context) => const SelectYear(
-                              level: "first",
-                            ));
+                        builder: (context) => const EndSemester());
                   }),
                 ],
               ),
               sizedBox(height: 30.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  buttonCard(
+                      context,
+                      width / 3,
+                      height / 7,
+                      const FaIcon(FontAwesomeIcons.users),
+                      "بدء فصل دراسي جديد",
+                      () {}),
+                  buttonCard(
+                      context,
+                      width / 3,
+                      height / 7,
+                      const FaIcon(FontAwesomeIcons.calendar),
+                      "عبور الطلبة",
+                      () {}),
+                ],
+              ),
             ],
           ),
         ),
