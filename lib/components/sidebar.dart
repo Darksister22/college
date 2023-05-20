@@ -25,7 +25,11 @@ SideBar sideBar(context, selectedRoute) {
       AdminMenuItem(
           title: "المراحل الدراسية",
           icon: FontAwesomeIcons.book,
-          route: '/levelmenu')
+          route: '/levelmenu'),
+      AdminMenuItem(
+          title: "الطلبة الخريجين",
+          icon: FontAwesomeIcons.userGraduate,
+          route: '/graduatetable')
     ],
     selectedRoute: selectedRoute,
     onSelected: (item) {

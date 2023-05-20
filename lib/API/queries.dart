@@ -308,4 +308,15 @@ class ApiPosts {
           isError: true);
     }
   }
+
+  Future updateGrad(String summer, String id, showSnackBar) async {
+    var data = {'id': id, 'summer_deg': summer};
+    var res = await Api().dio.post('grads/update', data: data);
+    if (res.statusCode == 200) {
+      showSnackBar('تمت العملية بنجاح');
+    } else {
+      showSnackBar("حدث خطأ ما, يرجى التأكد من الاتصال بالشبكة.",
+          isError: true);
+    }
+  }
 }
